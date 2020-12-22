@@ -10,9 +10,9 @@ You will need to add **three** repositories. Mine, illumines, and Owains.
 
 Mine:
 
-- **Owner:** MeApeSmallBrain
+- **Owner:** hass-twon
 
-- **Name:** oofie-plugins
+- **Name:** has-external-plugins
 
 illumine's:
 
