@@ -439,12 +439,12 @@ testFunc = true;
 	}
 
 	private void unNoteBones() {
-		NPC Phials = npc.findNearestNpc(7995);
-		if (Phials != null) {
+		NPC druid = npc.findNearestNpc(7995);
+		if (druid != null) {
 		//	utils.sendGameMessage("phials not null");
 			targetMenu = new MenuEntry("", "", 14865, 7, 0, 0, false);
-			menu.setModifiedEntry(targetMenu, 533, inventory.getWidgetItem(533).getIndex(), 7);
-			mouse.delayMouseClick(Phials.getConvexHull().getBounds(), sleepDelay());
+			menu.setModifiedEntry(targetMenu, notedBoneID, inventory.getWidgetItem(notedBoneID).getIndex(), 7);
+			mouse.delayMouseClick(druid.getConvexHull().getBounds(), sleepDelay());
 		}
 		/*
 		NPC druid = npc.findNearestNpc(7995);

@@ -232,7 +232,7 @@ public interface hasChaosAltarConfiguration extends Config
 	)
 	default String instructions()
 	{
-		return "Makes prayer xp, start standing in chaos altar with bones, noted bones, and gold to unnote";
+		return "Makes prayer xp, start standing in chaos altar with bones, noted bones, and gold to unnote, START IN CHAOS ALTAR WITH UNNTOED BONESA";
 	}
 
 

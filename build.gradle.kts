@@ -13,7 +13,7 @@ plugins {
     checkstyle
 }
 
-project.extra["GithubUrl"] = "https://github.com/MeApeSmallBrain/oofie-plugins"
+project.extra["GithubUrl"] = "https://github.com/hass-twon/has-external-Plugins"
 
 apply<BootstrapPlugin>()
 
