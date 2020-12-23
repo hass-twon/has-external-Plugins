@@ -144,6 +144,7 @@ public class hasChaosAltarPlugin extends Plugin {
 	boolean usedBones;
 	boolean selectOption;
 	boolean testFunc;
+	int doorOption;
 	private final Set<Integer> itemIds = new HashSet<>();
 	Rectangle clickBounds;
 	//boolean clickOnPersonNow;
@@ -156,6 +157,7 @@ public class hasChaosAltarPlugin extends Plugin {
 	private void resetVals() {
 
 		state = null;
+
 		timedOut = 0;
 		timedOut = 0;
 		botTimer = null;
@@ -177,6 +179,7 @@ public class hasChaosAltarPlugin extends Plugin {
 				usedBones = false;
 				state = null;
 				targetMenu = null;
+				doorOption = 0;
 				//clickOnPersonNow = false;
 				botTimer = Instant.now();
 				setLocation();
@@ -251,7 +254,12 @@ testFunc = true;
 			return ATALTAR;
 		}
 		if(inventory.containsItem(boneID) && !client.getLocalPlayer().getWorldLocation().equals(altarLocation) && inventory.containsItem(notedBoneID)){
-			return WALKTOALTAR;
+			if(!isDoorOpen()){
+				return CLICKDOOR;
+			}else{
+				return WALKTOALTAR;
+			}
+
 		}
 
 		if(chatOpen()){
@@ -425,10 +433,12 @@ testFunc = true;
 		Point random = new Point(0,0);
 		int randtest = calc.getRandomIntBetweenRange(0,1);
 		//utils.sendGameMessage(String.valueOf(randtest));
-		if(randtest==1){
+		if(doorOption==0){
 			targetMenu = new MenuEntry("Open","<col=ffff>Large door",1521,3,62,52,false);
+			doorOption++;
 		}else{
 			targetMenu = new MenuEntry("Open","<col=ffff>Large door",1521,3,54,52,false);
+			doorOption--;
 		}
 
 
