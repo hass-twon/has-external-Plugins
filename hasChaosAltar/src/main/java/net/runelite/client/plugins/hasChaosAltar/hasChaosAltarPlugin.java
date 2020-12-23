@@ -415,7 +415,7 @@ testFunc = true;
 	}
 
 	private void useBonesOnAltar(){
-		WidgetItem bones = inventory.getWidgetItem(ItemID.BIG_BONES);
+		WidgetItem bones = inventory.getWidgetItem(boneID);
 		chaosAltar = object.findNearestGameObject(411);
 
 		if(bones != null){
