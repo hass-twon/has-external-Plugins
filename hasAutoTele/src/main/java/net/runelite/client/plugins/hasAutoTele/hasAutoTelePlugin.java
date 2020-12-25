@@ -121,7 +121,7 @@ public class hasAutoTelePlugin extends Plugin {
 	@Inject
 	PluginManager pluginManager;
 
-
+	boolean checkForReset;
 	Instant botTimer;
 	WallObject targetWallObject;
 	hasAutoTeleState state;
@@ -188,7 +188,7 @@ public class hasAutoTelePlugin extends Plugin {
 		// runs on plugin shutdown
 
 		log.info("Plugin stopped");
-		startChaosAltar = false;
+
 	}
 
 
@@ -211,20 +211,52 @@ public class hasAutoTelePlugin extends Plugin {
 
 	@Subscribe
 	private void onGameTick(GameTick tick) {
+	//	utils.sendGameMessage("we are on");
 
 		player = client.getLocalPlayer();
 		if (client != null && player != null && client.getGameState() == GameState.LOGGED_IN){
-			int hp = client.getBoostedSkillLevel(Skill.HITPOINTS);
 
-			utils.sendGameMessage(String.valueOf(timeRun));
+			String state = getState();
+
+			switch(state){
+				case "TIMEOUT":
+					timeout--;
+					break;
+				case "TELE":
+					clickTeleTab();
+					teleported = true;
+					checkForReset = true;
+					botTimer = Instant.now();
+					timeout = 3;
+					break;
+
+				case "RESET":
+					teleported = false;
+					checkForReset  = false;
+					break;
+				case "IDLE":
+					//utils.sendGameMessage("NO CLUE");
+					break;
+
+			}
+			/*
+			if(timeout>0){
+				timeout--;
+				break;
+			}
+
+			//utils.sendGameMessage(String.valueOf(timeRun));
+			//utils.sendGameMessage(String.valueOf(teleported) + " si value fo teleproted, valyue of any food left " + String.valueOf(anyFoodLeft()));
 		//	utils.sendGameMessage(String.valueOf(hp) + " this is your current hp, and the hp to tele at is " + String.valueOf(teleHP));
 			if(hp<=teleHP && !teleported && !anyFoodLeft()){
 				clickTeleTab();
 				teleported = true;
 				botTimer = Instant.now();
-			}else if(resetTime()){
-				teleported = false;
+				timeout = 3;
 			}
+			if(resetTime()){
+				teleported = false;
+			} */
 		}
 
 
@@ -238,31 +270,46 @@ public class hasAutoTelePlugin extends Plugin {
 		}
 	}
 
-	private boolean chatOpen(){
-
-
-
-		if(client.getWidget(219,1) == null){
-			return false;
-		}else{
-			return true;
+	private String getState(){
+		int hp = client.getBoostedSkillLevel(Skill.HITPOINTS);
+		if(timeout>0){
+			return "TIMEOUT";
 		}
+
+		if(hp<=teleHP && !teleported && !anyFoodLeft()){
+			return "TELE";
+		}
+		if(checkForReset){
+			if(resetTime()){
+				return "RESET";
+			}else{
+				timeout =3;
+				return "TIMEOUT";
+			}
+
+		}
+		return "IDLE";
 	}
 
 
 	private void clickTeleTab(){
 
 			WidgetItem tablet = inventory.getWidgetItem(tabID);
-			targetMenu = new MenuEntry("BREAK", "BREAK", tabID, 33, 8, 9764864, false);
-			menu.setEntry(targetMenu);
-			mouse.delayMouseClick(tablet.getCanvasLocation(), sleepDelay());
+			if(tablet != null){
+				targetMenu = new MenuEntry("BREAK", "BREAK", tabID, 33, tablet.getIndex(), 9764864, false);
+				menu.setEntry(targetMenu);
+				mouse.delayMouseClick(tablet.getCanvasLocation(), sleepDelay());
+
+			}else{
+				utils.sendGameMessage("no tablet to tele");
+			}
 
 	}
 
 	private boolean resetTime(){
 		Duration duration = Duration.between(botTimer, Instant.now());
 		timeRun = (int) duration.getSeconds();
-		utils.sendGameMessage(String.valueOf(timeRun));
+	//	utils.sendGameMessage(String.valueOf(timeRun));
 		if(timeRun>config.timeToReset()){
 			return true;
 		}else{

@@ -232,7 +232,7 @@ public interface hasAutoTeleConfiguration extends Config
 	)
 	default String instructions()
 	{
-		return "Enter the teleport tabs ID, and then set the HP to tab at, and then the time after which it can tp u again";
+		return "Enter the teleport tabs ID, and then set the HP to tab at, and then the time after which it can tp you again";
 	}
 
 
