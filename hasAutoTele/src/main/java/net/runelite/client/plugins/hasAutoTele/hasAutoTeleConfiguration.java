@@ -251,7 +251,7 @@ public interface hasAutoTeleConfiguration extends Config
 
 	@ConfigItem(
 			keyName = "tabID",
-			name = "Teleport TAB HP",
+			name = "Teleport TAB ID",
 			description = "",
 			position = 22
 
