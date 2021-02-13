@@ -376,7 +376,7 @@ testFunc = true;
 	private void unNoteBones() {
 		NPC druid = npc.findNearestNpc(7995);
 		if (druid != null) {
-			targetMenu = new MenuEntry("", "", 14865, ITEM_USE_ON_NPC.getId(), 0, 0, false);
+			targetMenu = new MenuEntry("", "", 1956, ITEM_USE_ON_NPC.getId(), 0, 0, false);
 			menu.setModifiedEntry(targetMenu, notedBoneID, inventory.getWidgetItem(notedBoneID).getIndex(),  ITEM_USE_ON_NPC.getId());
 			mouse.delayMouseClick(druid.getConvexHull().getBounds(), sleepDelay());
 		}
