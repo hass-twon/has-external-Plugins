@@ -211,8 +211,6 @@ public class hasAutoTelePlugin extends Plugin {
 
 	@Subscribe
 	private void onGameTick(GameTick tick) {
-	//	utils.sendGameMessage("we are on");
-
 		player = client.getLocalPlayer();
 		if (client != null && player != null && client.getGameState() == GameState.LOGGED_IN){
 
@@ -235,30 +233,10 @@ public class hasAutoTelePlugin extends Plugin {
 					checkForReset  = false;
 					break;
 				case "IDLE":
-					//utils.sendGameMessage("NO CLUE");
 					break;
-
-			}
-			/*
-			if(timeout>0){
-				timeout--;
-				break;
 			}
 
-			//utils.sendGameMessage(String.valueOf(timeRun));
-			//utils.sendGameMessage(String.valueOf(teleported) + " si value fo teleproted, valyue of any food left " + String.valueOf(anyFoodLeft()));
-		//	utils.sendGameMessage(String.valueOf(hp) + " this is your current hp, and the hp to tele at is " + String.valueOf(teleHP));
-			if(hp<=teleHP && !teleported && !anyFoodLeft()){
-				clickTeleTab();
-				teleported = true;
-				botTimer = Instant.now();
-				timeout = 3;
-			}
-			if(resetTime()){
-				teleported = false;
-			} */
 		}
-
 
 	}
 
@@ -309,10 +287,9 @@ public class hasAutoTelePlugin extends Plugin {
 	private boolean resetTime(){
 		Duration duration = Duration.between(botTimer, Instant.now());
 		timeRun = (int) duration.getSeconds();
-	//	utils.sendGameMessage(String.valueOf(timeRun));
 		if(timeRun>config.timeToReset()){
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -328,8 +305,4 @@ public class hasAutoTelePlugin extends Plugin {
 			return false;
 		}
 	}
-
-
-
-
 }

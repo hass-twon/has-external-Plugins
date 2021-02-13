@@ -2,60 +2,34 @@ package net.runelite.client.plugins.hasChaosAltar;
 
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
-import java.awt.Rectangle;
-///api
-import net.runelite.api.*;
 import net.runelite.api.Point;
-import net.runelite.api.Client;
-import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
-import net.runelite.api.GameObject;
+import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ConfigButtonClicked;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.MenuOptionClicked;
-import static net.runelite.api.MenuOpcode.ITEM_USE_ON_GAME_OBJECT;
-
-
-///client
-import net.runelite.api.widgets.Widget;
-import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
-import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.config.ConfigManager;
+import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.*;
-import net.runelite.client.plugins.Plugin;
-import net.runelite.client.plugins.PluginDependency;
-import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
-
-
-///iUtils
 import net.runelite.client.plugins.iutils.*;
-import net.runelite.client.plugins.iutils.ActionQueue;
-import net.runelite.client.plugins.iutils.BankUtils;
-import net.runelite.client.plugins.iutils.InventoryUtils;
-import net.runelite.client.plugins.iutils.CalculationUtils;
-import net.runelite.client.plugins.iutils.MenuUtils;
-import net.runelite.client.plugins.iutils.MouseUtils;
-import net.runelite.client.plugins.iutils.ObjectUtils;
-import net.runelite.client.plugins.iutils.PlayerUtils;
-
-
-import static net.runelite.api.MenuOpcode.ITEM_USE_ON_NPC;
-import static net.runelite.client.plugins.hasChaosAltar.hasChaosAltarState.*;
-
-
-
-
 import org.pf4j.Extension;
 
 import javax.inject.Inject;
+import java.awt.*;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+
+import static net.runelite.api.MenuOpcode.ITEM_USE_ON_GAME_OBJECT;
+import static net.runelite.api.MenuOpcode.ITEM_USE_ON_NPC;
+import static net.runelite.client.plugins.hasChaosAltar.hasChaosAltarState.*;
+
+///api
+///client
+///iUtils
 
 
 @Extension
@@ -147,7 +121,6 @@ public class hasChaosAltarPlugin extends Plugin {
 	int doorOption;
 	private final Set<Integer> itemIds = new HashSet<>();
 	Rectangle clickBounds;
-	//boolean clickOnPersonNow;
 
 	@Provides
 	hasChaosAltarConfiguration provideConfig(ConfigManager configManager) {
@@ -157,7 +130,6 @@ public class hasChaosAltarPlugin extends Plugin {
 	private void resetVals() {
 
 		state = null;
-
 		timedOut = 0;
 		timedOut = 0;
 		botTimer = null;
@@ -180,14 +152,10 @@ public class hasChaosAltarPlugin extends Plugin {
 				state = null;
 				targetMenu = null;
 				doorOption = 0;
-				//clickOnPersonNow = false;
 				botTimer = Instant.now();
 				setLocation();
 				boneID = config.getBoneType().getId();
 				notedBoneID = config.getBoneType().getNotedID();
-
-
-			//	utils.sendGameMessage("bone id is " + String.valueOf(boneID) + "noted bone id is " + String.valueOf(notedBoneID));
 
 			} else {
 				resetVals();
@@ -199,8 +167,6 @@ testFunc = true;
 
 	@Override
 	protected void shutDown() {
-		// runs on plugin shutdown
-
 		log.info("Plugin stopped");
 		startChaosAltar = false;
 	}
@@ -265,9 +231,6 @@ testFunc = true;
 		if(chatOpen()){
 			return SELECTCHOICE;
 		}
-	//	if(clickOnPersonNow){
-	//		return DUDE;
-	//	}
 		if(usedBones = true && isDoorOpen() && inventory.containsItem(notedBoneID)){
 		return CLICKDUDE;
 		}
@@ -282,9 +245,7 @@ testFunc = true;
 				timedOut =0;
 				return  CLICKDOOR;
 			}
-
 		}
-
 		if(!inventory.containsItem(boneID) && inventory.containsItem(notedBoneID) && client.getLocalPlayer().getWorldLocation().equals(altarLocation)){
 			usedBones = true;
 			timeout = 1;
@@ -295,20 +256,11 @@ testFunc = true;
 		if(!inventory.containsItem(boneID) && !inventory.containsItem(notedBoneID)){
 			return FINISHED;
 		}
-
-
-
-
-
-
 		return IDLE;
 	}
 
 	@Subscribe
 	private void onGameTick(GameTick tick) {
-		if(testFunc == true){
-			testFunc();
-		}
 		if (!startChaosAltar) {
 			return;
 		}
@@ -336,7 +288,6 @@ testFunc = true;
 					timeout = tickDelay();
 					break;
 				case ATALTAR:
-					//utils.sendGameMessage("We are here");
 					useBonesOnAltar();
 					break;
 				case FINISHED:
@@ -345,11 +296,8 @@ testFunc = true;
 					break;
 				case CLICKDUDE:
 					utils.sendGameMessage("clicking on dude");
-				//	selectBones();
-
 					unNoteBones();
 					selectOption = true;
-					//walk.sceneWalk(dudeLocaiton,0,sleepDelay());
 					break;
 				case CLICKDOOR:
 					openDoor();
@@ -373,13 +321,8 @@ testFunc = true;
 					selectOption = false;
 					usedBones = false;
 					break;
-					}else{
-						//utils.sendGameMessage("chat not open yet");
 					}
-					break;
-
 			}
-
 		}
 	}
 
@@ -392,27 +335,13 @@ testFunc = true;
 	}
 
 	private boolean chatOpen(){
-
-
-
 		if(client.getWidget(219,1) == null){
 			return false;
 		}else{
 			return true;
 		}
 	}
-	private void withdrawItems() {
-		if (inventory.isEmpty() && bank.isOpen())
-		{
-			withdrawX(1783);
-			timeout=1+tickDelay();
-		}
-		else
-		{
-			if(inventory.containsItem(ItemID.BUCKET_OF_SAND))
-			withdrawX(1781);
-		}
-	}
+
 
 	private void useBonesOnAltar(){
 		WidgetItem bones = inventory.getWidgetItem(boneID);
@@ -431,8 +360,6 @@ testFunc = true;
 	private void openDoor(){
 		targettObject = object.findNearestGameObject(566);
 		Point random = new Point(0,0);
-		int randtest = calc.getRandomIntBetweenRange(0,1);
-		//utils.sendGameMessage(String.valueOf(randtest));
 		if(doorOption==0){
 			targetMenu = new MenuEntry("Open","<col=ffff>Large door",1521,3,62,52,false);
 			doorOption++;
@@ -443,52 +370,16 @@ testFunc = true;
 
 
 		menu.setEntry(targetMenu);
-		//mouse.click(random);
 		mouse.delayMouseClick(random,sleepDelay());
-		//mouse.delayMouseClick(targettObject.getConvexHull().getBounds(),sleepDelay());
 	}
 
 	private void unNoteBones() {
 		NPC druid = npc.findNearestNpc(7995);
 		if (druid != null) {
-		//	utils.sendGameMessage("phials not null");
-			targetMenu = new MenuEntry("", "", 14865, 7, 0, 0, false);
-			menu.setModifiedEntry(targetMenu, notedBoneID, inventory.getWidgetItem(notedBoneID).getIndex(), 7);
+			targetMenu = new MenuEntry("", "", 1956, ITEM_USE_ON_NPC.getId(), 0, 0, false);
+			menu.setModifiedEntry(targetMenu, notedBoneID, inventory.getWidgetItem(notedBoneID).getIndex(),  ITEM_USE_ON_NPC.getId());
 			mouse.delayMouseClick(druid.getConvexHull().getBounds(), sleepDelay());
 		}
-		/*
-		NPC druid = npc.findNearestNpc(7995);
-		if (druid != null) {
-			//targetMenu = new MenuEntry("", "<col=ff9040>Big bones<col=ffffff>-><col=ffff00>Elder Chaos druid", 1895, 7, 0, 0, false);
-		//	menu.setEntry(targetMenu);
-			//mouse.delayMouseClick(druid.getConvexHull().getBounds(),sleepDelay());
-			//selectOption = true;
-			//menu.setModifiedEntry(targetMenu, NOTE_ID, inventory.getWidgetItem(NOTE_ID).getIndex(), 7);
-			//mouse.delayMouseClick(Phials.getConvexHull().getBounds(), sleepDelay());
-			//targetMenu = new MenuEntry("","", 1895, 7, 0, 0, false);
-			//menu.setModifiedEntry(targetMenu, notedBoneID, inventory.getWidgetItem(notedBoneID).getIndex(), 7);
-			//mouse.delayMouseClick(druid.getConvexHull().getBounds(), sleepDelay());
-			//targetMenu = new MenuEntry("Talk-to", "<col=ffff00>Elder Chaos Druid Templeton", druid.getIndex(), 9,0,0, false);
-			//menu.setEntry(targetMenu);
-			//mouse.delayMouseClick(druid.getConvexHull().getBounds(), sleepDelay());
-			WidgetItem bonez = inventory.getWidgetItem(notedBoneID);
-			if (bonez != null)
-			{
-				targetMenu = new MenuEntry("", "", druid.getId(), ITEM_USE_ON_NPC.getId(),
-						0, 0, false);
-			//	utils.doNpcActionMsTime(targetMenu, bonez.getId(), bonez.getIndex(), ITEM_USE_ON_NPC.getId(), druid.getConvexHull(), sleepDelay());
-				utils.doActionMsTime(targetMenu,druid.getConvexHull().getBounds(),sleepDelay());
-				timeout = tickDelay();
-			}else{
-				utils.sendGameMessage("bonez are null");
-			}
-
-			return;
-		}else{
-			utils.sendGameMessage("druid is null");
-		}
-*/
-
 	}
 
 	private boolean isDoorOpen(){
@@ -500,44 +391,9 @@ testFunc = true;
 		}
 	}
 
-	private void testFunc(){
-
-//utils.sendGameMessage(String.valueOf(randtest));
-	}
-	private void selectBones(){
-		/*
-		WidgetItem bonez = inventory.getWidgetItem(notedBoneID);
-		targetMenu = new MenuEntry("Use", "Use", 533, MenuOpcode.ITEM_USE.getId(),
-				bonez.getIndex(), 9764864, false);
-		menu.setEntry(targetMenu);
-		mouse.delayMouseClick(bonez.getCanvasBounds(),sleepDelay());
-	*/
-	}
-
-	private void depositItems() {
-		if (inventory.isFull() && bank.isOpen())
-			bank.depositAll();
-	}
-	private void makeGlass() {
-		utils.doActionMsTime(new MenuEntry("Make", "<col=ff9040>Molten glass</col>", 1, 57, -1, 17694734, false), client.getWidget(270,14).getBounds(), sleepDelay());
-		{
-			mouse.getClickPoint(client.getWidget(270,14).getBounds());
-		}
-	}
-
 	@Subscribe
 	private void onMenuOptionClicked(MenuOptionClicked event){
 		log.info(event.toString());
 	}
-	private void withdrawX(int ID){
-		if(client.getVarbitValue(3960)!=14){
-			bank.withdrawItemAmount(ID,14);
-			timeout+=3;
-		} else {
-			targetMenu = new MenuEntry("", "", (client.getVarbitValue(6590) == 3) ? 1 : 5, MenuOpcode.CC_OP.getId(), bank.getBankItemWidget(ID).getIndex(), 786444, false);
-			menu.setEntry(targetMenu);
-			clickBounds = bank.getBankItemWidget(ID).getBounds()!=null ? bank.getBankItemWidget(ID).getBounds() : new Rectangle(client.getCenterX() - 50, client.getCenterY() - 50, 100, 100);
-			mouse.delayMouseClick(clickBounds,sleepDelay());
-		}
-	}
+
 }

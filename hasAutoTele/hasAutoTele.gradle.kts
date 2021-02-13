@@ -29,7 +29,7 @@ project.extra["PluginName"] = "hasAutoTele"
 project.extra["PluginDescription"] = "Automatically teles when out of food and below hp"
 
 dependencies {
-    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "2.3.3+");
+    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "2.3.6+");
 }
 
 tasks {
