@@ -29,7 +29,7 @@ project.extra["PluginName"] = "has-smither"
 project.extra["PluginDescription"] = "harastwon - smiths item of choice at varrock smithery"
 
 dependencies {
-    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "2.3.3+");
+    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "2.3.6+");
 
 }
 

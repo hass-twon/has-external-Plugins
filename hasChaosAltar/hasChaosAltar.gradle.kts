@@ -29,7 +29,7 @@ project.extra["PluginName"] = "hasChaosAltar"
 project.extra["PluginDescription"] = "Automatically makes prayer xp"
 
 dependencies {
-    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "2.3.3+");
+    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "2.3.6+");
 }
 
 tasks {
