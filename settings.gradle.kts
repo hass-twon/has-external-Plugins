@@ -28,7 +28,7 @@ rootProject.name = "has-external-Plugins"
 include(":hasChaosAltar")
 include(":hasSmither")
 include(":hasAutoTele")
-
+include(":hasCrabs")
 
 for (project in rootProject.children) {
     project.apply {

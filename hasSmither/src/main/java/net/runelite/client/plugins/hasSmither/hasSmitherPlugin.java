@@ -64,8 +64,8 @@ import net.runelite.client.plugins.iutils.PlayerUtils;
         name = "has-smither",
         enabledByDefault = false,
         description = "Smiths item of choice at varrock",
-        tags = {"has", "smith", "smither"},
-        type = PluginType.SKILLING
+        tags = {"has", "smith", "smither"}
+
 )
 @Slf4j
 public class hasSmitherPlugin extends Plugin {
@@ -424,7 +424,7 @@ public class hasSmitherPlugin extends Plugin {
 
     private void chooseItem() {
 //utils.sendGameMessage(Integer.toString(smithingWidg));
-        targetMenu = new MenuEntry("", "", 1, MenuOpcode.CC_OP.getId(), -1, smithingWidg, false);
+        targetMenu = new MenuEntry("", "", 1, MenuAction.CC_OP.getId(), -1, smithingWidg, false);
         if (targetMenu != null) {
             //utils.sendGameMessage("not null");
             menu.setEntry(targetMenu);

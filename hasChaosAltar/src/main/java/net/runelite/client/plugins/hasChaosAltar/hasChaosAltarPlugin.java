@@ -23,8 +23,8 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import static net.runelite.api.MenuOpcode.ITEM_USE_ON_GAME_OBJECT;
-import static net.runelite.api.MenuOpcode.ITEM_USE_ON_NPC;
+import static net.runelite.api.MenuAction.ITEM_USE_ON_GAME_OBJECT;
+import static net.runelite.api.MenuAction.ITEM_USE_ON_NPC;
 import static net.runelite.client.plugins.hasChaosAltar.hasChaosAltarState.*;
 
 ///api
@@ -38,8 +38,8 @@ import static net.runelite.client.plugins.hasChaosAltar.hasChaosAltarState.*;
 	name = "has-chaosAltar",
 	enabledByDefault = false,
 	description = "Makes prayer xp",
-	tags = {"has, chaos, chaosaltar, xp"},
-	type = PluginType.SKILLING
+	tags = {"has, chaos, chaosaltar, xp"}
+
 )
 @Slf4j
 public class hasChaosAltarPlugin extends Plugin {

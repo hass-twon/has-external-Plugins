@@ -23,10 +23,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.2"
+version = "0.6.0"
 
-project.extra["PluginName"] = "has-smither"
-project.extra["PluginDescription"] = "harastwon - smiths item of choice at varrock smithery"
+project.extra["PluginName"] = "has-crabs"
+project.extra["PluginDescription"] = "harastwon - does crabs, resets aggro after 10 mins"
 
 dependencies {
     compileOnly(group = "com.openosrs.externals", name = "iutils", version = "3.1.0+");
@@ -37,16 +37,16 @@ tasks {
     jar {
         manifest {
             attributes(mapOf(
-                    "Plugin-Version" to project.version,
-                    "Plugin-Id" to nameToId(project.extra["PluginName"] as String),
-                    "Plugin-Provider" to project.extra["PluginProvider"],
+                "Plugin-Version" to project.version,
+                "Plugin-Id" to nameToId(project.extra["PluginName"] as String),
+                "Plugin-Provider" to project.extra["PluginProvider"],
                 "Plugin-Dependencies" to
                         arrayOf(
                             nameToId("iUtils"),
                             "chinbreakhandler-plugin"
                         ).joinToString(),
-                    "Plugin-Description" to project.extra["PluginDescription"],
-                    "Plugin-License" to project.extra["PluginLicense"]
+                "Plugin-Description" to project.extra["PluginDescription"],
+                "Plugin-License" to project.extra["PluginLicense"]
             ))
         }
     }

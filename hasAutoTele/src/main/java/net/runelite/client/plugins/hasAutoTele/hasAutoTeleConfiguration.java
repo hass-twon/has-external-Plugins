@@ -25,29 +25,21 @@
  */
 package net.runelite.client.plugins.hasAutoTele;
 
-import net.runelite.client.config.Button;
-import net.runelite.client.config.Config;
-import net.runelite.client.config.ConfigGroup;
-import net.runelite.client.config.ConfigItem;
-import net.runelite.client.config.ConfigSection;
-import net.runelite.client.config.ConfigTitleSection;
-import net.runelite.client.config.Range;
-import net.runelite.client.config.Title;
+import net.runelite.client.config.*;
+import net.runelite.client.config.ConfigTitle;
+
 
 @ConfigGroup("hasAutoTele")
 public interface hasAutoTeleConfiguration extends Config
 {
 
-	@ConfigSection(
+	@ConfigTitle(
 		keyName = "delayConfig",
 		name = "Sleep Delay Configuration",
 		description = "Configure how the bot handles sleep delays",
 		position = 2
 	)
-	default boolean delayConfig()
-	{
-		return false;
-	}
+	boolean delayConfig = false;
 
 	@Range(
 		min = 0,
@@ -125,16 +117,13 @@ public interface hasAutoTeleConfiguration extends Config
 		return false;
 	}
 
-	@ConfigSection(
+	@ConfigTitle(
 		keyName = "delayTickConfig",
 		name = "Game Tick Configuration",
 		description = "Configure how the bot handles game tick delays, 1 game tick equates to roughly 600ms",
 		position = 8
 	)
-	default boolean delayTickConfig()
-	{
-		return false;
-	}
+	String delayTickConfig = "delayTickConfig";
 
 	@Range(
 		min = 0,
@@ -212,23 +201,20 @@ public interface hasAutoTeleConfiguration extends Config
 		return false;
 	}
 
-	@ConfigTitleSection(
+	@ConfigTitle(
 		keyName = "instructionsTitle",
-		name = "Instructions",
+		name = "instruction",
 		description = "",
 		position = 16
 	)
-	default Title instructionsTitle()
-	{
-		return new Title();
-	}
+	String instruction = "Instructions";
 
 	@ConfigItem(
 		keyName = "instructions",
 		name = "",
 		description = "Instructions. Don't enter anything into this field",
 		position = 20,
-		titleSection = "instructionsTitle"
+		title = "instructionsTitle"
 	)
 	default String instructions()
 	{

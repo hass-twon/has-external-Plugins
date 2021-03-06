@@ -8,7 +8,7 @@ import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.Client;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.GameObject;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
@@ -16,7 +16,7 @@ import net.runelite.api.events.ConfigButtonClicked;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.MenuOptionClicked;
-import static net.runelite.api.MenuOpcode.ITEM_USE_ON_GAME_OBJECT;
+import static net.runelite.api.MenuAction.ITEM_USE_ON_GAME_OBJECT;
 
 
 ///client
@@ -29,7 +29,7 @@ import net.runelite.client.plugins.*;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
+
 
 
 ///iUtils
@@ -44,7 +44,7 @@ import net.runelite.client.plugins.iutils.ObjectUtils;
 import net.runelite.client.plugins.iutils.PlayerUtils;
 
 
-import static net.runelite.api.MenuOpcode.ITEM_USE_ON_NPC;
+import static net.runelite.api.MenuAction.ITEM_USE_ON_NPC;
 import static net.runelite.client.plugins.hasAutoTele.hasAutoTeleState.*;
 
 
@@ -65,8 +65,8 @@ import java.util.Set;
 	name = "has-AutoTele",
 	enabledByDefault = false,
 	description = "Makes prayer xp",
-	tags = {"has, chaos, chaosaltar, xp"},
-	type = PluginType.PVM
+	tags = {"has, chaos, chaosaltar, xp"}
+
 )
 @Slf4j
 public class hasAutoTelePlugin extends Plugin {
