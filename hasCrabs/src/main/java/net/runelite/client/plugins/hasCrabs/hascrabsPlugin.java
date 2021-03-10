@@ -27,20 +27,21 @@ package net.runelite.client.plugins.hasCrabs;
 
 import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.*;
+import net.runelite.api.Client;
+import net.runelite.api.GameState;
+import net.runelite.api.NPC;
+import net.runelite.api.Player;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ConfigButtonClicked;
 import net.runelite.api.events.GameTick;
-import net.runelite.api.widgets.Widget;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginManager;
-import net.runelite.client.plugins.iutils.*;
+import net.runelite.client.plugins.botutils.BotUtils;
 import org.pf4j.Extension;
 
 import javax.inject.Inject;
@@ -50,7 +51,7 @@ import java.time.Instant;
 import net.runelite.client.ui.overlay.OverlayManager;
 
 @Extension
-@PluginDependency(iUtils.class)
+@PluginDependency(BotUtils.class)
 @PluginDescriptor(
         name = "has-crabs",
         enabledByDefault = false,
@@ -60,7 +61,6 @@ import net.runelite.client.ui.overlay.OverlayManager;
 )
 @Slf4j
 public class hascrabsPlugin extends Plugin {
-
     @Inject
     private Client client;
 
@@ -74,50 +74,10 @@ public class hascrabsPlugin extends Plugin {
     private hascrabsConfiguration config;
 
     @Inject
-    private iUtils utils;
-
-    @Inject
-    private ActionQueue action;
-
-    @Inject
-    private MouseUtils mouse;
-
-    @Inject
-    private PlayerUtils playerUtils;
-
-    @Inject
-    private InventoryUtils inventory;
-
-    @Inject
-    private InterfaceUtils interfaceUtils;
-
-    @Inject
-    private CalculationUtils calc;
-
-    @Inject
-    private MenuUtils menu;
-
-    @Inject
-    private ObjectUtils object;
-
-    @Inject
-    private BankUtils bank;
-
-    @Inject
-    private NPCUtils npc;
-
-    @Inject
-    private KeyboardUtils key;
-
-    @Inject
-    private WalkUtils walk;
+    private BotUtils utils;
 
     @Inject
     private ConfigManager configManager;
-
-    @Inject
-    PluginManager pluginManager;
-
 
     @Inject
     private ItemManager itemManager;
@@ -143,8 +103,6 @@ public class hascrabsPlugin extends Plugin {
     int timeRuns;
     int randVar;
     int resetTime;
-    MenuEntry targetMenu;
-    Widget specialOrb = client.getWidget(160, 30);
 
     @Provides
     hascrabsConfiguration provideConfig(ConfigManager configManager) {
@@ -154,7 +112,6 @@ public class hascrabsPlugin extends Plugin {
 
     @Override
     protected void startUp() {
-
 
         utils.sendGameMessage("plogin Started");
         overlayManager.add(overlay);
@@ -183,7 +140,7 @@ public class hascrabsPlugin extends Plugin {
             setLocations();
             botTimer = Instant.now();
             totalTimer = Instant.now();
-            randVar = calc.getRandomIntBetweenRange(-5,6);
+            randVar = utils.getRandomIntBetweenRange(-5, 6);
             walkToCrab = true;
             startBot = true;
             waiting = false;
@@ -217,7 +174,7 @@ public class hascrabsPlugin extends Plugin {
 
                         //utils.sendGameMessage("Going to crabs");
                         if (player.getWorldLocation().distanceTo(customLocation) > 0) {
-                            walk.webWalk(customLocation, 0, playerUtils.isMoving(beforeLoc), sleepDelay());
+                            utils.webWalk(customLocation, 0, utils.isMoving(beforeLoc), sleepDelay());
                             //	utils.walk(customLocation,0,sleepDelay());
                             status = "Walking to crab";
                             timeout = tickDelay();
@@ -253,23 +210,12 @@ public class hascrabsPlugin extends Plugin {
 
 
 
-                        }/*else{
-                            if(config.useSpecialAttack()){
-                                int spec_percent = client.getVar(VarPlayer.SPECIAL_ATTACK_PERCENT);
-
-                                if(spec_percent == 900){
-                                    targetMenu = new MenuEntry("Use <col=00ff00>Special Attack</col>", "", 1, MenuOpcode.CC_OP.getId(), -1, 38862884, false);
-                                    utils.setMenuEntry(targetMenu);
-                                    utils.delayMouseClick(specialOrb.getCanvasLocation(),122);
-                                }
-
-                            }
-                        }*/
+                        }
                         break;
                     case "RESETTING":
                         if (player.getWorldLocation().distanceTo(resetLocation) > 4) {
                             //   utils.webWalk(resetLocation, 3, utils.isMoving(beforeLoc), sleepDelay());
-                            walk.sceneWalk(resetLocation, 3, sleepDelay());
+                            utils.walk(resetLocation, 3, sleepDelay());
                             timeout = tickDelay();
                             status = "Resetting";
                             break;
@@ -344,12 +290,12 @@ public class hascrabsPlugin extends Plugin {
     }
 
     private long sleepDelay() {
-        sleepLength = calc.randomDelay(false, 60, 300, 20, 100);
+        sleepLength = utils.randomDelay(false, 60, 300, 20, 100);
         return sleepLength;
     }
 
     private int tickDelay() {
-        tickLength = (int) calc.randomDelay(false, 1, 3, 1, 2);
+        tickLength = (int) utils.randomDelay(false, 1, 3, 1, 2);
         return tickLength;
     }
 

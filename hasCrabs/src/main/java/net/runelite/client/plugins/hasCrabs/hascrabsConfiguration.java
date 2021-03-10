@@ -34,13 +34,13 @@ public interface hascrabsConfiguration extends Config
 
 
 	@ConfigItem(
-			keyName = "CrabType",
+			keyName = "crabType",
 			name = "crab type",
 			description = "which typa crabs ye wanna do",
 			position = 1,
 			section = "SandCrab Positions"
 	)
-	default CrabType crabType() { return CrabType.SAND; }
+	default CrabType crabType() { return CrabType.CUSTOM; }
 
 
 
@@ -52,7 +52,6 @@ public interface hascrabsConfiguration extends Config
 			position = 2
 	)
 	String coordsTitle = "coordsTitle";
-
 
 	@ConfigItem(
 			keyName = "customCrabLocation",
@@ -83,7 +82,7 @@ public interface hascrabsConfiguration extends Config
 
 	@ConfigItem(
 			keyName = "resetTime",
-			name = "Reset Time",
+			name = "Reset TIme",
 			description = "How long to wait before resetting",
 			position = 5
 	)
@@ -93,24 +92,12 @@ public interface hascrabsConfiguration extends Config
 	}
 
 
-	@ConfigItem(
-			keyName = "useSpecialAttack",
-			name = "Use Special Attack",
-			description = "do ye wanna use yer special attakc",
-			position = 6
-	)
-	default boolean useSpecialAttack()
-	{
-		return false;
-	}
-
-
 
 	@ConfigItem(
 			keyName = "startButton",
 			name = "Start",
 			description = "",
-			position = 7,
+			position = 6,
 			section = "Controls"
 	)
 	default Button startButton() { return new Button(); }
@@ -119,7 +106,7 @@ public interface hascrabsConfiguration extends Config
 			keyName = "stopButton",
 			name = "Stop",
 			description = "",
-			position = 8,
+			position = 7,
 			section = "Controls"
 	)
 	default Button stopButton() { return new Button(); }
