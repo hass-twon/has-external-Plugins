@@ -23,10 +23,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "0.1.0"
+version = "1.0.0"
 
-project.extra["PluginName"] = "rogue denner "
-project.extra["PluginDescription"] = "harastwon - shite plugin"
+project.extra["PluginName"] = "hass-RoguesDen "
+project.extra["PluginDescription"] = "harastwon - does most of rogues den for you make sure u have full run"
 
 dependencies {
     compileOnly(group = "com.openosrs.externals", name = "botutils", version = "4.9.3");

@@ -64,23 +64,5 @@ public interface hRoguesDenConfiguration extends Config {
         return new Button();
     }
 
-    @ConfigItem(
-            keyName = "testButton",
-            name = "Test",
-            description = "",
-            position = 3
-    )
-    default Button testButton() {
-        return new Button();
-    }
 
-    @ConfigItem(
-            keyName = "testButton2",
-            name = "Test2",
-            description = "",
-            position = 3
-    )
-    default Button testButton2() {
-        return new Button();
-    }
 }
