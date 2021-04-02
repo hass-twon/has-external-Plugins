@@ -41,7 +41,7 @@ public interface hRoguesDenConfiguration extends Config {
             position = 1
     )
     default String instructionsForUse() {
-        return "Talk to Brian o' Richards to be able to do minigame, and be in the Rogues Den";
+        return "Talk to Brian o' Richards to be able to do minigame, and be in front of the door, USE a dose of stamina before you go or else you will fail, click stop once done and start again";
     }
 
     @ConfigItem(
@@ -63,6 +63,8 @@ public interface hRoguesDenConfiguration extends Config {
     default Button stopButton() {
         return new Button();
     }
+
+
 
 
 }
