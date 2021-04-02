@@ -30,6 +30,17 @@ include(":hasSmither")
 include(":hasAutoTele")
 include(":hasCrabs")
 include(":hRoguesDen")
+include(":hasMHomes")
+include("hasVorkHelper")
+include("hasContinue")
+include("hasNPCDeaggro")
+include("hasGE")
+include("hasMisc")
+include("hasFletching")
+include("hasBlank")
+include("hasWerewolf")
+include("hasAutoHop")
+include("hasSaradomin")
 
 for (project in rootProject.children) {
     project.apply {
