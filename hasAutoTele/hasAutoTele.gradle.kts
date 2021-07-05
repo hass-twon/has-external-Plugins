@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.7"
+version = "1.0.8"
 
 project.extra["PluginName"] = "hasAutoTele"
 project.extra["PluginDescription"] = "Automatically teles when out of food and below hp"

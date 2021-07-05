@@ -373,11 +373,13 @@ testFunc = true;
 		mouse.delayMouseClick(random,sleepDelay());
 	}
 
+	//1956 original
+	//
 	private void unNoteBones() {
 		NPC druid = npc.findNearestNpc(7995);
 		if (druid != null) {
-			targetMenu = new MenuEntry("", "", 1956, ITEM_USE_ON_NPC.getId(), 0, 0, false);
-			menu.setModifiedEntry(targetMenu, notedBoneID, inventory.getWidgetItem(notedBoneID).getIndex(),  ITEM_USE_ON_NPC.getId());
+			targetMenu = new MenuEntry("", "", druid.getIndex(), ITEM_USE_ON_NPC.getId(), 0, 0, false);
+			menu.setModifiedEntry(targetMenu, notedBoneID, inventory.getWidgetItem(notedBoneID).getIndex(),  MenuAction.ITEM_USE_ON_NPC.getId());
 			mouse.delayMouseClick(druid.getConvexHull().getBounds(), sleepDelay());
 		}
 	}

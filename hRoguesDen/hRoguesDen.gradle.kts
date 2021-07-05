@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.1"
+version = "1.0.2"
 
 project.extra["PluginName"] = "hass-RoguesDen "
 project.extra["PluginDescription"] = "harastwon - does most of rogues den for you make sure u have full run"

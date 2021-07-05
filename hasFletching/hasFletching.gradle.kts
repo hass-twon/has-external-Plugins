@@ -23,10 +23,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.0"
+version = "1.0.1"
 
 project.extra["PluginName"] = "hasFletching"
-project.extra["PluginDescription"] = "Automatically buys stuff from GE"
+project.extra["PluginDescription"] = "Automatically feltches shit and stuff "
 
 dependencies {
     compileOnly(group = "com.openosrs.externals", name = "iutils", version = "3.1.0+");

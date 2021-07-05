@@ -51,8 +51,7 @@ import net.runelite.client.plugins.botutils.BotUtils;
 import org.pf4j.Extension;
 import net.runelite.api.ItemID;
 
-import static net.runelite.api.MenuAction.GAME_OBJECT_FIRST_OPTION;
-import static net.runelite.api.MenuAction.ITEM_USE_ON_NPC;
+import static net.runelite.api.MenuAction.*;
 
 
 @Extension
@@ -775,8 +774,6 @@ public class hRoguesDenPlugin extends Plugin {
 		log.info(String.valueOf(flash.getQuantity()) + " si the number of flashes");
 		if(flash.getQuantity()<5){
 			utils.walk(agTen,0,20);
-			test = false;
-			timeout = 1;
 			return;
 		}
 		if(flash == null){
@@ -785,7 +782,7 @@ public class hRoguesDenPlugin extends Plugin {
 		}
 		NPC guard = utils.findNearestNpc(3191);
 		if (guard != null) {
-			targetMenu = new MenuEntry("", "", 20487, ITEM_USE_ON_NPC.getId(), 0, 0, false);
+			targetMenu = new MenuEntry("", "", guard.getIndex(), ITEM_USE_ON_NPC.getId(), 0, 0, false);
 			utils.setModifiedMenuEntry(targetMenu,flash.getId(),flash.getIndex(),MenuAction.ITEM_USE_ON_NPC.getId());
 			utils.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
 			return;
@@ -899,7 +896,7 @@ public class hRoguesDenPlugin extends Plugin {
 
 	private void solvePuzzle(){
 		if(client.getWidget(161,16) != null){
-			targetMenu = new MenuEntry("Ok", "", 0, 24, 0, 19202051, false);
+			targetMenu = new MenuEntry("", "", 0, CC_OP.getId(), -1, 45088773, false);
 			utils.setMenuEntry(targetMenu);
 			utils.delayMouseClick(getRandomNullPoint(), sleepDelay());
 			return;
