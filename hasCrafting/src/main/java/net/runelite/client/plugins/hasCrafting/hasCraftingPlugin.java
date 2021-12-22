@@ -125,7 +125,7 @@ public class hasCraftingPlugin extends Plugin {
 
 	long sleepLength;
 	int timeout;
-	MenuEntry targetMenu;
+	LegacyMenuEntry targetMenu;
 	private final Set<Integer> itemIds = new HashSet<>();
 	private final Set<Integer> keepItem = Set.of(ItemID.CHISEL);
 	Rectangle clickBounds;
@@ -311,8 +311,9 @@ public class hasCraftingPlugin extends Plugin {
 			}
 			 */
 
-			targetMenu = new MenuEntry("Bank", "<col=ffff00>Banker", banker.getIndex(),NPC_THIRD_OPTION.getId() , 0, 0, false);
-			utils.doInvokeMsTime(targetMenu,sleepDelay());
+			targetMenu = new LegacyMenuEntry("Bank", "<col=ffff00>Banker", banker.getIndex(),NPC_THIRD_OPTION.getId() , 0, 0, false);
+			utils.doActionMsTime(targetMenu, new Point(0,0),sleepDelay());
+			//utils.doInvokeMsTime(targetMenu,sleepDelay());
 
 		}else{
 			utils.sendGameMessage("Cannot find banker");
@@ -335,7 +336,7 @@ public class hasCraftingPlugin extends Plugin {
 			//menu.setModifiedEntry(new MenuEntry("", "", knife.getId(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), knife.getIndex(), WidgetInfo.INVENTORY.getId(),
 			//		false), log.getId(), log.getIndex(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId());
 			//mouse.click(knife.getCanvasBounds());
-			menu.setModifiedEntry(targetMenu = new MenuEntry("", "", tool.getId(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), tool.getIndex(), WidgetInfo.INVENTORY.getId(),
+			menu.setModifiedEntry(targetMenu = new LegacyMenuEntry("", "", tool.getId(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), tool.getIndex(), WidgetInfo.INVENTORY.getId(),
 							false), rawItem.getId(), rawItem.getIndex(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId());
 			utils.doInvokeMsTime(targetMenu,sleepDelay());
 
@@ -345,7 +346,7 @@ public class hasCraftingPlugin extends Plugin {
 
 	private void selectCorrectItemToCraft(){
 		//fletchValue = config.craftItem().getIdValue();
-		targetMenu = new MenuEntry("", "", 1,CC_OP.getId() , -1, 17694734, false);
+		targetMenu = new LegacyMenuEntry("", "", 1,CC_OP.getId() , -1, 17694734, false);
 		utils.doInvokeMsTime(targetMenu,sleepDelay());
 
 	}

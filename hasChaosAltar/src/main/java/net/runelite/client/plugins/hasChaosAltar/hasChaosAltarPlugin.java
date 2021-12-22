@@ -99,7 +99,7 @@ public class hasChaosAltarPlugin extends Plugin {
 	WallObject targetWallObject;
 	hasChaosAltarState state;
 	GameObject targettObject;
-	MenuEntry targetMenu;
+	LegacyMenuEntry targetMenu;
 	WorldPoint skillLocation;
 	NPC targetNPC;
 	Instant botTimer;
@@ -315,7 +315,7 @@ testFunc = true;
 					if(chatOpen()){
 						targetNPC = npc.findNearestNpc(7995);
 					//utils.sendGameMessage("chat is opne so select an option");
-					targetMenu = new MenuEntry("Continue","",0,30,3,14352385,false);
+					targetMenu = new LegacyMenuEntry("Continue","",0,30,3,14352385,false);
 					menu.setEntry(targetMenu);
 					mouse.delayMouseClick(targetNPC.getConvexHull().getBounds(),sleepDelay());
 					selectOption = false;
@@ -349,7 +349,7 @@ testFunc = true;
 
 		if(bones != null){
 
-			targetMenu = new MenuEntry("", "", chaosAltar.getId(), ITEM_USE_ON_GAME_OBJECT.getId(),
+			targetMenu = new LegacyMenuEntry("", "", chaosAltar.getId(), ITEM_USE_ON_GAME_OBJECT.getId(),
 					chaosAltar.getSceneMinLocation().getX(), chaosAltar.getSceneMinLocation().getY(), false);
 			utils.doModifiedActionMsTime(targetMenu, bones.getId(), bones.getIndex(), ITEM_USE_ON_GAME_OBJECT.getId(), chaosAltar.getConvexHull().getBounds(), sleepDelay());
 
@@ -361,10 +361,10 @@ testFunc = true;
 		targettObject = object.findNearestGameObject(566);
 		Point random = new Point(0,0);
 		if(doorOption==0){
-			targetMenu = new MenuEntry("Open","<col=ffff>Large door",1521,3,62,52,false);
+			targetMenu = new LegacyMenuEntry("Open","<col=ffff>Large door",1521,3,62,52,false);
 			doorOption++;
 		}else{
-			targetMenu = new MenuEntry("Open","<col=ffff>Large door",1521,3,54,52,false);
+			targetMenu = new LegacyMenuEntry("Open","<col=ffff>Large door",1521,3,54,52,false);
 			doorOption--;
 		}
 
@@ -378,7 +378,7 @@ testFunc = true;
 	private void unNoteBones() {
 		NPC druid = npc.findNearestNpc(7995);
 		if (druid != null) {
-			targetMenu = new MenuEntry("", "", druid.getIndex(), ITEM_USE_ON_NPC.getId(), 0, 0, false);
+			targetMenu = new LegacyMenuEntry("", "", druid.getIndex(), ITEM_USE_ON_NPC.getId(), 0, 0, false);
 			menu.setModifiedEntry(targetMenu, notedBoneID, inventory.getWidgetItem(notedBoneID).getIndex(),  MenuAction.ITEM_USE_ON_NPC.getId());
 			mouse.delayMouseClick(druid.getConvexHull().getBounds(), sleepDelay());
 		}

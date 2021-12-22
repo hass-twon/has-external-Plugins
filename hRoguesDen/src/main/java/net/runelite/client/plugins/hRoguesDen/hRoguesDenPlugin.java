@@ -37,7 +37,6 @@ import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
-import net.runelite.api.queries.TileQuery;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
@@ -48,6 +47,7 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.botutils.BotUtils;
+import net.runelite.client.plugins.iutils.*;
 import org.pf4j.Extension;
 import net.runelite.api.ItemID;
 
@@ -76,6 +76,45 @@ public class hRoguesDenPlugin extends Plugin {
 	private BotUtils utils;
 
 	@Inject
+	private iUtils iiutils;
+
+	@Inject
+	private ActionQueue action;
+
+	@Inject
+	private MouseUtils mouse;
+
+	@Inject
+	private PlayerUtils playerUtils;
+
+	@Inject
+	private InventoryUtils inventory;
+
+	@Inject
+	private InterfaceUtils interfaceUtils;
+
+	@Inject
+	private CalculationUtils calc;
+
+	@Inject
+	private MenuUtils menu;
+
+	@Inject
+	private ObjectUtils object;
+
+	@Inject
+	private BankUtils bank;
+
+	@Inject
+	private NPCUtils npc;
+
+	@Inject
+	private KeyboardUtils key;
+
+	@Inject
+	private WalkUtils walk;
+
+	@Inject
 	private ConfigManager configManager;
 
 	@Inject
@@ -93,7 +132,7 @@ public class hRoguesDenPlugin extends Plugin {
 	long sleepLength;
 	int tickLength;
 	String state;
-	MenuEntry targetMenu;
+	LegacyMenuEntry targetMenu;
 	boolean flashReady;
 	boolean waitPlayerEnter;
 	LocalPoint beforeLoc = new LocalPoint(0, 0);
@@ -434,8 +473,9 @@ public class hRoguesDenPlugin extends Plugin {
 						log.info("we are on OB21");
 						GameObject objObstacle = utils.findNearestGameObject(7249);
 						if (objObstacle != null) {
-							targetMenu = new MenuEntry("", "", objObstacle.getId(), 1001, objObstacle.getSceneMinLocation().getX(), objObstacle.getSceneMinLocation().getY(), false);
-							utils.setMenuEntry(targetMenu);
+							targetMenu = new LegacyMenuEntry("", "", objObstacle.getId(), 1001, objObstacle.getSceneMinLocation().getX(), objObstacle.getSceneMinLocation().getY(), false);
+
+							menu.setEntry( targetMenu,false);
 							utils.delayMouseClick(objObstacle.getConvexHull().getBounds(), sleepDelay());
 
 						}else{
@@ -464,7 +504,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB24":
 
 						log.info("we are on OB24");
-						pickUpObj(5568);
+						//pickUpObj(5568);               WHEN PICXKUP FIXED UNCOMMENT
 						pickedUpObject = true;
 						waitLocation =xxiv;
 						waitFinish = true;
@@ -575,7 +615,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB33.5":
 
 						log.info("we are on OB33.5");
-						pickUpFlash(5559);
+						//pickUpFlash(5559);                UNCOMMENT WHEN PICKFLASH WORKING
 						pickedUpFlash = true;
 						waitLocation = agNine;
 						waitFinish = true;
@@ -782,8 +822,8 @@ public class hRoguesDenPlugin extends Plugin {
 		}
 		NPC guard = utils.findNearestNpc(3191);
 		if (guard != null) {
-			targetMenu = new MenuEntry("", "", guard.getIndex(), ITEM_USE_ON_NPC.getId(), 0, 0, false);
-			utils.setModifiedMenuEntry(targetMenu,flash.getId(),flash.getIndex(),MenuAction.ITEM_USE_ON_NPC.getId());
+			targetMenu = new LegacyMenuEntry("", "", guard.getIndex(), ITEM_USE_ON_NPC.getId(), 0, 0, false);
+			menu.setModifiedEntry(targetMenu,flash.getId(),flash.getIndex(),MenuAction.ITEM_USE_ON_NPC.getId());
 			utils.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
 			return;
 
@@ -799,8 +839,8 @@ public class hRoguesDenPlugin extends Plugin {
 			log.info("it is null");
 		return;
 		}
-		targetMenu = new MenuEntry("","",7237,GAME_OBJECT_FIRST_OPTION.getId(),das.getLocalLocation().getSceneX(),das.getLocalLocation().getSceneY(),false);
-		utils.setMenuEntry(targetMenu);
+		targetMenu = new LegacyMenuEntry("","",7237,GAME_OBJECT_FIRST_OPTION.getId(),das.getLocalLocation().getSceneX(),das.getLocalLocation().getSceneY(),false);
+		menu.setEntry(targetMenu);
 		utils.delayMouseClick(das.getConvexHull().getBounds(),sleepDelay());
 		return;
 
@@ -828,18 +868,18 @@ public class hRoguesDenPlugin extends Plugin {
 	}
 	private void selectFlash(){
 		WidgetItem flash = utils.getInventoryWidgetItem(5559);
-		targetMenu = new MenuEntry("Use", "Use", 5559, MenuAction.ITEM_USE.getId(),
+		targetMenu = new LegacyMenuEntry("Use", "Use", 5559, MenuAction.ITEM_USE.getId(),
 				flash.getIndex(), 9764864, false);
-		utils.setMenuEntry(targetMenu);
+		menu.setEntry(targetMenu);
 		utils.delayMouseClick(flash.getCanvasBounds(), sleepDelay());
 	}
 	private void selectGuard(){
 		log.info("Running test 2");
 		guard = utils.findNearestNpc(3191);
 		WidgetItem flash = utils.getInventoryWidgetItem(5559);
-		targetMenu = new MenuEntry("Examine", "<col=ffff00>Rogue Guard", 19934, 1003,
+		targetMenu = new LegacyMenuEntry("Examine", "<col=ffff00>Rogue Guard", 19934, 1003,
 				0, 0, false);
-		utils.setModifiedMenuEntry(targetMenu, flash.getId(), flash.getIndex(), MenuAction.ITEM_USE_ON_NPC.getId());
+		menu.setModifiedEntry(targetMenu, flash.getId(), flash.getIndex(), MenuAction.ITEM_USE_ON_NPC.getId());
 		utils.delayMouseClick(guard.getConvexHull().getBounds(), 40);
 
 
@@ -896,14 +936,15 @@ public class hRoguesDenPlugin extends Plugin {
 
 	private void solvePuzzle(){
 		if(client.getWidget(161,16) != null){
-			targetMenu = new MenuEntry("", "", 0, CC_OP.getId(), -1, 45088773, false);
-			utils.setMenuEntry(targetMenu);
+			targetMenu = new LegacyMenuEntry("", "", 0, CC_OP.getId(), -1, 45088773, false);
+			menu.setEntry(targetMenu);
 			utils.delayMouseClick(getRandomNullPoint(), sleepDelay());
 			return;
 		}
 
 	}
 
+	/*Tile querty no longer works, idk fix it
 	private void pickUpObj(int id){
 
 			log.info("tile piece under player called.");
@@ -921,13 +962,15 @@ public class hRoguesDenPlugin extends Plugin {
 			}
 
 	}
+	*/
+
 	private void testFunction( ){
 		log.info("running test 1");
 		guard = utils.findNearestNpc(3191);
 		WidgetItem flash = utils.getInventoryWidgetItem(5559);
-		targetMenu = new MenuEntry("Use", "Use", ItemID.FLASH_POWDER, 38,
+		targetMenu = new LegacyMenuEntry("Use", "Use", ItemID.FLASH_POWDER, 38,
 				flash.getIndex(), 9764864, false);
-		utils.setModifiedMenuEntry(targetMenu,guard.getIndex(),0,MenuAction.ITEM_USE_ON_NPC.getId());
+		menu.setModifiedEntry(targetMenu,guard.getIndex(),0,MenuAction.ITEM_USE_ON_NPC.getId());
 		utils.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
 
 
@@ -943,9 +986,9 @@ public class hRoguesDenPlugin extends Plugin {
 			if(player.getWorldLocation().getRegionY()-guard.getWorldLocation().getRegionY()<4) {
 				log.info("going to go flash");
 				WidgetItem flash = utils.getInventoryWidgetItem(5559);
-				targetMenu = new MenuEntry("Examine", "<col=ffff00>Rogue Guard", 19934, 1003,
+				targetMenu = new LegacyMenuEntry("Examine", "<col=ffff00>Rogue Guard", 19934, 1003,
 						0, 0, false);
-				utils.setModifiedMenuEntry(targetMenu, flash.getId(), flash.getIndex(), MenuAction.ITEM_USE_ON_NPC.getId());
+				menu.setModifiedEntry(targetMenu, flash.getId(), flash.getIndex(), MenuAction.ITEM_USE_ON_NPC.getId());
 				utils.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
 
 				//runFast = true;
@@ -960,6 +1003,7 @@ public class hRoguesDenPlugin extends Plugin {
 
 
 	}
+	/*
 	private void pickUpFlash(int id){
 
 		log.info("tile piece under player called.");
@@ -967,7 +1011,7 @@ public class hRoguesDenPlugin extends Plugin {
 			if(tile.getGroundItems()!=null){
 				for(TileItem tileItem : tile.getGroundItems()){
 					if(tileItem.getId()==id){
-						targetMenu = new MenuEntry ("Take", "<col=ff9040>Flash powder (5)",5559,20,client.getLocalPlayer().getLocalLocation().getSceneX(),client.getLocalPlayer().getLocalLocation().getSceneY(),false);
+						targetMenu = new LegacyMenuEntry("Take", "<col=ff9040>Flash powder (5)",5559,20,client.getLocalPlayer().getLocalLocation().getSceneX(),client.getLocalPlayer().getLocalLocation().getSceneY(),false);
 						utils.setMenuEntry(targetMenu);
 						utils.delayMouseClick(getRandomNullPoint(), sleepDelay());
 						return;
@@ -977,6 +1021,8 @@ public class hRoguesDenPlugin extends Plugin {
 		}
 
 	}
+
+	 */
 	private boolean checkIfEntered() {
 
 		if (client.getLocalPlayer().getWorldLocation().equals(firstLocation)) {
@@ -1016,8 +1062,8 @@ public class hRoguesDenPlugin extends Plugin {
 	private void doObstacle(int id) {
 		GameObject objObstacle = utils.findNearestGameObject(id);
 		if (objObstacle != null) {
-			targetMenu = new MenuEntry("", "", objObstacle.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), objObstacle.getSceneMinLocation().getX(), objObstacle.getSceneMinLocation().getY(), false);
-			utils.setMenuEntry(targetMenu);
+			targetMenu = new LegacyMenuEntry("", "", objObstacle.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), objObstacle.getSceneMinLocation().getX(), objObstacle.getSceneMinLocation().getY(), false);
+			menu.setEntry(targetMenu);
 			utils.delayMouseClick(objObstacle.getConvexHull().getBounds(), sleepDelay());
 			return;
 		}
@@ -1027,8 +1073,8 @@ public class hRoguesDenPlugin extends Plugin {
 
 		GameObject objObstacle = utils.findNearestGameObjectWithin(loc,0,id);
 		if (objObstacle != null) {
-			targetMenu = new MenuEntry("", "", objObstacle.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), objObstacle.getSceneMinLocation().getX(), objObstacle.getSceneMinLocation().getY(), false);
-			utils.setMenuEntry(targetMenu);
+			targetMenu = new LegacyMenuEntry("", "", objObstacle.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), objObstacle.getSceneMinLocation().getX(), objObstacle.getSceneMinLocation().getY(), false);
+			menu.setEntry(targetMenu);
 			utils.delayMouseClick(objObstacle.getConvexHull().getBounds(), sleepDelay());
 			return;
 		}
@@ -1038,8 +1084,8 @@ public class hRoguesDenPlugin extends Plugin {
 
 		GroundObject groundObstacle = utils.findNearestGroundObject(id);
 		if (groundObstacle != null) {
-			targetMenu = new MenuEntry("", "", groundObstacle.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), groundObstacle.getLocalLocation().getSceneX(), groundObstacle.getLocalLocation().getSceneY(), false);
-			utils.setMenuEntry(targetMenu);
+			targetMenu = new LegacyMenuEntry("", "", groundObstacle.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), groundObstacle.getLocalLocation().getSceneX(), groundObstacle.getLocalLocation().getSceneY(), false);
+			menu.setEntry(targetMenu);
 			utils.delayMouseClick(groundObstacle.getConvexHull().getBounds(), sleepDelay());
 			return;
 		}
@@ -1054,9 +1100,9 @@ public class hRoguesDenPlugin extends Plugin {
 	private void enterDoor(int id) {
 		targetWallObject = utils.findNearestWallObject(id);
 		if (targetWallObject != null) {
-			targetMenu = new MenuEntry("", "", targetWallObject.getId(), 3,
+			targetMenu = new LegacyMenuEntry("", "", targetWallObject.getId(), 3,
 					targetWallObject.getLocalLocation().getSceneX(), targetWallObject.getLocalLocation().getSceneY(), false);
-			utils.setMenuEntry(targetMenu);
+			menu.setEntry(targetMenu);
 			utils.delayMouseClick(targetWallObject.getConvexHull().getBounds(), sleepDelay());
 		} else {
 			log.info("is null");
@@ -1068,9 +1114,9 @@ public class hRoguesDenPlugin extends Plugin {
 		targetWallObject = utils.findWallObjectWithin(loc,0,id);;
 
 		if (targetWallObject != null) {
-			targetMenu = new MenuEntry("", "", targetWallObject.getId(), 3,
+			targetMenu = new LegacyMenuEntry("", "", targetWallObject.getId(), 3,
 					targetWallObject.getLocalLocation().getSceneX(), targetWallObject.getLocalLocation().getSceneY(), false);
-			utils.setMenuEntry(targetMenu);
+			menu.setEntry(targetMenu);
 			utils.delayMouseClick(targetWallObject.getConvexHull().getBounds(), sleepDelay());
 		} else {
 			log.info("is null");

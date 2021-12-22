@@ -126,7 +126,7 @@ public class hasAutoTelePlugin extends Plugin {
 	WallObject targetWallObject;
 	hasAutoTeleState state;
 	GameObject targettObject;
-	MenuEntry targetMenu;
+	LegacyMenuEntry targetMenu;
 	WorldPoint skillLocation;
 	NPC targetNPC;
 	int timeToReset;
@@ -274,7 +274,7 @@ public class hasAutoTelePlugin extends Plugin {
 
 			WidgetItem tablet = inventory.getWidgetItem(tabID);
 			if(tablet != null){
-				targetMenu = new MenuEntry("BREAK", "BREAK", tabID, 33, tablet.getIndex(), 9764864, false);
+				targetMenu = new LegacyMenuEntry("BREAK", "BREAK", tabID, 33, tablet.getIndex(), 9764864, false);
 				menu.setEntry(targetMenu);
 				mouse.delayMouseClick(tablet.getCanvasLocation(), sleepDelay());
 

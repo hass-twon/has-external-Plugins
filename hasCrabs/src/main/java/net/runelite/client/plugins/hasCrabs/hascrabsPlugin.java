@@ -41,17 +41,18 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.botutils.BotUtils;
+import net.runelite.client.plugins.iutils.*;
 import org.pf4j.Extension;
 
 import javax.inject.Inject;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.concurrent.ExecutorService;
 
 import net.runelite.client.ui.overlay.OverlayManager;
 
 @Extension
-@PluginDependency(BotUtils.class)
+@PluginDependency(iUtils.class)
 @PluginDescriptor(
         name = "has-crabs",
         enabledByDefault = false,
@@ -74,7 +75,46 @@ public class hascrabsPlugin extends Plugin {
     private hascrabsConfiguration config;
 
     @Inject
-    private BotUtils utils;
+    private iUtils utils;
+
+    @Inject
+    private ActionQueue action;
+
+    @Inject
+    private MouseUtils mouse;
+
+    @Inject
+    private ExecutorService executorService;
+
+    @Inject
+    private PlayerUtils playerUtils;
+
+    @Inject
+    private InventoryUtils inventory;
+
+    @Inject
+    private InterfaceUtils interfaceUtils;
+
+    @Inject
+    private CalculationUtils calc;
+
+    @Inject
+    private MenuUtils menu;
+
+    @Inject
+    private ObjectUtils object;
+
+    @Inject
+    private BankUtils bank;
+
+    @Inject
+    private NPCUtils npc;
+
+    @Inject
+    private KeyboardUtils key;
+
+    @Inject
+    private WalkUtils walk;
 
     @Inject
     private ConfigManager configManager;
@@ -140,7 +180,7 @@ public class hascrabsPlugin extends Plugin {
             setLocations();
             botTimer = Instant.now();
             totalTimer = Instant.now();
-            randVar = utils.getRandomIntBetweenRange(-5, 6);
+            randVar = calc.getRandomIntBetweenRange(-5, 6);
             walkToCrab = true;
             startBot = true;
             waiting = false;
@@ -170,11 +210,13 @@ public class hascrabsPlugin extends Plugin {
             } else {
                 states = getState();
                 switch (states) {
+
                     case "GOTOCRAB":
 
                         //utils.sendGameMessage("Going to crabs");
                         if (player.getWorldLocation().distanceTo(customLocation) > 0) {
-                            utils.webWalk(customLocation, 0, utils.isMoving(beforeLoc), sleepDelay());
+                            //utils.webWalk(customLocation, 0, playerUtils.isMoving(beforeLoc), sleepDelay());
+                            walk.webWalk(customLocation, 0, playerUtils.isMoving(beforeLoc), sleepDelay());
                             //	utils.walk(customLocation,0,sleepDelay());
                             status = "Walking to crab";
                             timeout = tickDelay();
@@ -215,7 +257,8 @@ public class hascrabsPlugin extends Plugin {
                     case "RESETTING":
                         if (player.getWorldLocation().distanceTo(resetLocation) > 4) {
                             //   utils.webWalk(resetLocation, 3, utils.isMoving(beforeLoc), sleepDelay());
-                            utils.walk(resetLocation, 3, sleepDelay());
+                            //utils.walk(resetLocation, 3, sleepDelay());
+                            walk.sceneWalk(resetLocation,3,sleepDelay());
                             timeout = tickDelay();
                             status = "Resetting";
                             break;
@@ -290,12 +333,13 @@ public class hascrabsPlugin extends Plugin {
     }
 
     private long sleepDelay() {
-        sleepLength = utils.randomDelay(false, 60, 300, 20, 100);
+
+        sleepLength = calc.randomDelay(false, 60, 300, 20, 100);
         return sleepLength;
     }
 
     private int tickDelay() {
-        tickLength = (int) utils.randomDelay(false, 1, 3, 1, 2);
+        tickLength = (int) calc.randomDelay(false, 1, 3, 1, 2);
         return tickLength;
     }
 

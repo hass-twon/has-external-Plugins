@@ -32,6 +32,7 @@ include(":hasCrabs")
 include(":hRoguesDen")
 include("hasFletching")
 include("hasCrafting")
+include("hasNPCDeaggro")
 
 for (project in rootProject.children) {
     project.apply {

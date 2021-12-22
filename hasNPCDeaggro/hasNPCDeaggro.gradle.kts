@@ -22,11 +22,10 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+version = "1.0.0"
 
-version = "1.0.2"
-
-project.extra["PluginName"] = "hasCrafting"
-project.extra["PluginDescription"] = "Automatically buys stuff from GE"
+project.extra["PluginName"] = "has-NPCDeaggroer"
+project.extra["PluginDescription"] = "deaggros npc such as crabs"
 
 dependencies {
     compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.7.5+");
@@ -36,16 +35,16 @@ tasks {
     jar {
         manifest {
             attributes(mapOf(
-                    "Plugin-Version" to project.version,
-                    "Plugin-Id" to nameToId(project.extra["PluginName"] as String),
-                    "Plugin-Provider" to project.extra["PluginProvider"],
-                    "Plugin-Dependencies" to
-                            arrayOf(
-                                    nameToId("iUtils"),
-                                    "chinbreakhandler-plugin"
-                            ).joinToString(),
-                    "Plugin-Description" to project.extra["PluginDescription"],
-                    "Plugin-License" to project.extra["PluginLicense"]
+                "Plugin-Version" to project.version,
+                "Plugin-Id" to nameToId(project.extra["PluginName"] as String),
+                "Plugin-Provider" to project.extra["PluginProvider"],
+                "Plugin-Dependencies" to
+                        arrayOf(
+                            nameToId("iUtils"),
+                            "chinbreakhandler-plugin"
+                        ).joinToString(),
+                "Plugin-Description" to project.extra["PluginDescription"],
+                "Plugin-License" to project.extra["PluginLicense"]
             ))
         }
     }

@@ -127,7 +127,7 @@ public class hasSmitherPlugin extends Plugin {
     PluginManager pluginManager;
 
     boolean startSmithing;
-    MenuEntry targetMenu;
+    LegacyMenuEntry targetMenu;
     Player player;
     int timeOut = 0;
     boolean moving;
@@ -424,7 +424,7 @@ public class hasSmitherPlugin extends Plugin {
 
     private void chooseItem() {
 //utils.sendGameMessage(Integer.toString(smithingWidg));
-        targetMenu = new MenuEntry("", "", 1, MenuAction.CC_OP.getId(), -1, smithingWidg, false);
+        targetMenu = new LegacyMenuEntry("", "", 1, MenuAction.CC_OP.getId(), -1, smithingWidg, false);
         if (targetMenu != null) {
             //utils.sendGameMessage("not null");
             menu.setEntry(targetMenu);
@@ -460,7 +460,7 @@ public class hasSmitherPlugin extends Plugin {
     private void goToBank() {
         targetObject = object.findNearestGameObjectWithin(player.getWorldLocation(), 25, bankBoothID);
         if (targetObject != null) {
-            targetMenu = new MenuEntry("", "", targetObject.getId(), 4,
+            targetMenu = new LegacyMenuEntry("", "", targetObject.getId(), 4,
                     targetObject.getSceneMinLocation().getX(), targetObject.getSceneMinLocation().getY(), false);
             menu.setEntry(targetMenu);
             mouse.delayMouseClick(targetObject.getConvexHull().getBounds(), sleepDelay());
@@ -473,7 +473,7 @@ public class hasSmitherPlugin extends Plugin {
 
         targetObject = object.findNearestGameObjectWithin(player.getWorldLocation(), 25, anvilID);
         if (targetObject != null) {
-            targetMenu = new MenuEntry("", "", targetObject.getId(), 3,
+            targetMenu = new LegacyMenuEntry("", "", targetObject.getId(), 3,
                     targetObject.getSceneMinLocation().getX(), targetObject.getSceneMinLocation().getY(), false);
             menu.setEntry(targetMenu);
             mouse.delayMouseClick(targetObject.getConvexHull().getBounds(), sleepDelay());

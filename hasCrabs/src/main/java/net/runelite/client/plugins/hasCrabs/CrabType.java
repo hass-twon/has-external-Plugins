@@ -1,7 +1,7 @@
 package net.runelite.client.plugins.hasCrabs;
 
 public enum CrabType {
-    SAND,
+    CUSTOM,
     AMMONITE,
-    CUSTOM
+    SAND
 }

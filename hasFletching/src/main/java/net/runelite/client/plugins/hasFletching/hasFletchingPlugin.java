@@ -125,7 +125,7 @@ public class hasFletchingPlugin extends Plugin {
 
 	long sleepLength;
 	int timeout;
-	MenuEntry targetMenu;
+	LegacyMenuEntry targetMenu;
 	private final Set<Integer> itemIds = new HashSet<>();
 	private final Set<Integer> keepItem = Set.of(946);
 	Rectangle clickBounds;
@@ -318,7 +318,7 @@ public class hasFletchingPlugin extends Plugin {
 			}
 			 */
 
-			targetMenu = new MenuEntry("Bank", "<col=ffff00>Banker", banker.getIndex(),NPC_THIRD_OPTION.getId() , 0, 0, false);
+			targetMenu = new LegacyMenuEntry("Bank", "<col=ffff00>Banker", banker.getIndex(),NPC_THIRD_OPTION.getId() , 0, 0, false);
 			utils.doInvokeMsTime(targetMenu,sleepDelay());
 
 		}else{
@@ -342,7 +342,7 @@ public class hasFletchingPlugin extends Plugin {
 			//menu.setModifiedEntry(new MenuEntry("", "", knife.getId(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), knife.getIndex(), WidgetInfo.INVENTORY.getId(),
 			//		false), log.getId(), log.getIndex(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId());
 			//mouse.click(knife.getCanvasBounds());
-			menu.setModifiedEntry(targetMenu = new MenuEntry("", "", knife.getId(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), knife.getIndex(), WidgetInfo.INVENTORY.getId(),
+			menu.setModifiedEntry(targetMenu = new LegacyMenuEntry("", "", knife.getId(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), knife.getIndex(), WidgetInfo.INVENTORY.getId(),
 							false), log.getId(), log.getIndex(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId());
 			utils.doInvokeMsTime(targetMenu,sleepDelay());
 
@@ -352,7 +352,7 @@ public class hasFletchingPlugin extends Plugin {
 
 	private void selectCorrectItemToSmith(){
 		//fletchValue = config.craftItem().getIdValue();
-		targetMenu = new MenuEntry("", "", 1,CC_OP.getId() , -1, fletchValue, false);
+		targetMenu = new LegacyMenuEntry("", "", 1,CC_OP.getId() , -1, fletchValue, false);
 		utils.doInvokeMsTime(targetMenu,sleepDelay());
 
 	}
