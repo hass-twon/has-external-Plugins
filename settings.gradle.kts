@@ -28,7 +28,7 @@ rootProject.name = "has-external-Plugins"
 include(":hasChaosAltar")
 include(":hasSmither")
 include(":hasAutoTele")
-include(":hasCrabs")
+//include(":hasCrabs")
 include(":hRoguesDen")
 include("hasFletching")
 include("hasCrafting")
