@@ -23,10 +23,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.2"
+version = "1.0.0"
 
-project.extra["PluginName"] = "hasCrafting"
-project.extra["PluginDescription"] = "Automatically buys stuff from GE"
+project.extra["PluginName"] = "hasBirdHouseRun"
+project.extra["PluginDescription"] = "One click plugin for BirdHouse Run"
 
 dependencies {
     compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.7.5+");

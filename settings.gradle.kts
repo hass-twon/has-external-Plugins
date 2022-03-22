@@ -29,9 +29,10 @@ include(":hasChaosAltar")
 include(":hasSmither")
 include(":hasAutoTele")
 include(":hRoguesDen")
-include("hasFletching")
-include("hasCrafting")
-include("hasNPCDeaggro")
+include(":hasFletching")
+include(":hasCrafting")
+include(":hasNPCDeaggro")
+include(":hasBirdHouseRun")
 
 for (project in rootProject.children) {
     project.apply {
