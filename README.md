@@ -25,3 +25,5 @@ owain's:
 - **Owner:** illumineawake
 
 - **Name:** illu-plugins
+
+**REPORT ISSUES IN ILLUMINES DISCORD**
