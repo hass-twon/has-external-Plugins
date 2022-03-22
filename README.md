@@ -26,4 +26,18 @@ owain's:
 
 - **Name:** illu-plugins
 
+**PLUGIN LIST**
+
+- hasChaosAltar
+- hasSmither
+- hasAutoTele
+- hRoguesDen
+- hasFletching
+- hasCrafting
+- hasNPCDeaggro
+- hasBirdHouseRun
+
 **REPORT ISSUES IN ILLUMINES DISCORD**
+
+
+
