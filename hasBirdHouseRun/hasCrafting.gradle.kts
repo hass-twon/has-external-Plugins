@@ -23,15 +23,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.0"
+version = "1.0.2"
 
-project.extra["PluginName"] = "has-Crabs"
-project.extra["PluginDescription"] = "harastwon - does crabs, resets aggro after 10 mins"
+project.extra["PluginName"] = "hasCrafting"
+project.extra["PluginDescription"] = "Automatically buys stuff from GE"
 
 dependencies {
-    //compileOnly(group = "com.openosrs.externals", name = "botutils", version = "5.1.0");
     compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.7.5+");
-
 }
 
 tasks {
@@ -41,7 +39,11 @@ tasks {
                     "Plugin-Version" to project.version,
                     "Plugin-Id" to nameToId(project.extra["PluginName"] as String),
                     "Plugin-Provider" to project.extra["PluginProvider"],
-                    "Plugin-Dependencies" to nameToId("BotUtils"),
+                    "Plugin-Dependencies" to
+                            arrayOf(
+                                    nameToId("iUtils"),
+                                    "chinbreakhandler-plugin"
+                            ).joinToString(),
                     "Plugin-Description" to project.extra["PluginDescription"],
                     "Plugin-License" to project.extra["PluginLicense"]
             ))

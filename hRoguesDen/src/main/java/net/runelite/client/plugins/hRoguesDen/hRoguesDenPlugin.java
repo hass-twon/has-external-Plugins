@@ -46,7 +46,6 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDependency;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.botutils.BotUtils;
 import net.runelite.client.plugins.iutils.*;
 import org.pf4j.Extension;
 import net.runelite.api.ItemID;
@@ -55,7 +54,7 @@ import static net.runelite.api.MenuAction.*;
 
 
 @Extension
-@PluginDependency(BotUtils.class)
+@PluginDependency(iUtils.class)
 
 @PluginDescriptor(
 	name = "hRoguesDen",
@@ -72,11 +71,9 @@ public class hRoguesDenPlugin extends Plugin {
 	@Inject
 	private hRoguesDenConfiguration config;
 
-	@Inject
-	private BotUtils utils;
 
 	@Inject
-	private iUtils iiutils;
+	private iUtils utils;
 
 	@Inject
 	private ActionQueue action;
@@ -280,7 +277,7 @@ public class hRoguesDenPlugin extends Plugin {
 
 				switch (state) {
 					case "ENTERDEN":
-						utils.sendGameMessage("Starting run of Rogues Den, if you don't have full run STOP!");
+						utils.sendGameMessage("Starting run of Rogues Den, if you don't have full run STOP! (Reccomended: 1 Dose Stamina");
 						log.info("GOing to go in");
 						enterDoor(7256);
 						inRoguesDen = false;
@@ -319,7 +316,8 @@ public class hRoguesDenPlugin extends Plugin {
 						}
 					case "OB2":
 						log.info("Doing ob 2");
-						utils.walk(thirdLocation, 0, sleepDelay());
+
+						walk.sceneWalk(thirdLocation, 0, sleepDelay());
 						waitLocation = thirdLocation;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -327,7 +325,7 @@ public class hRoguesDenPlugin extends Plugin {
 
 					case "OB3":
 						log.info("Doing ob3");
-						utils.walk(fourthLocation, 0, sleepDelay());
+						walk.sceneWalk(fourthLocation, 0, sleepDelay());
 						waitLocation = fourthLocation;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -342,14 +340,14 @@ public class hRoguesDenPlugin extends Plugin {
 						break;
 					case "OB5":
 						log.info("we are at 5th");
-						utils.walk(sixthLocation, 0, sleepDelay());
+						walk.sceneWalk(sixthLocation, 0, sleepDelay());
 						waitLocation = sixthLocation;
 						waitFinish = true;
 						timeout = tickDelay();
 						break;
 					case "OB6":
 						log.info("sixth spot");
-						utils.walk(seventhLocation, 0, sleepDelay());
+						walk.sceneWalk(seventhLocation, 0, sleepDelay());
 						waitLocation = seventhLocation;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -364,14 +362,14 @@ public class hRoguesDenPlugin extends Plugin {
 
 					case "OB8":
 						log.info("we are on OB8");
-						utils.walk(ninthLocation, 0, sleepDelay());
+						walk.sceneWalk(ninthLocation, 0, sleepDelay());
 						waitLocation = ninthLocation;
 						waitFinish = true;
 						timeout = tickDelay();
 						break;
 					case "OB9":
 						log.info("we are on OB9");
-						utils.walk(tenthLocation, 0, sleepDelay());
+						walk.sceneWalk(tenthLocation, 0, sleepDelay());
 						waitLocation = tenthLocResult;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -392,21 +390,21 @@ public class hRoguesDenPlugin extends Plugin {
 						break;
 					case "OB11":
 						log.info("we are on OB11");
-						utils.walk(twelfthLocation, 0, sleepDelay());
+						walk.sceneWalk(twelfthLocation, 0, sleepDelay());
 						waitLocation = twelfthLocation;
 						waitFinish = true;
 						timeout = tickDelay();
 						break;
 					case "OB12":
 						log.info("we are on OB12");
-						utils.walk(thirtheenlocation,0,sleepDelay());
+						walk.sceneWalk(thirtheenlocation,0,sleepDelay());
 						waitLocation =thirtheenlocation;
 						waitFinish = true;
 						timeout = tickDelay();
 						break;
 					case "OB13":
 						log.info("we are on OB13");
-						//utils.walk(thirtheenlocation,0,sleepDelay());
+						//walk.sceneWalk(thirtheenlocation,0,sleepDelay());
 						enterDoor(7219);
 						waitLocation = forteenLocation;
 						waitFinish = true;
@@ -415,7 +413,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB14":
 						WorldPoint loko = new WorldPoint(2957,5074,1);
 						log.info("we are on OB14");
-						utils.walk(loko,0,sleepDelay());
+						walk.sceneWalk(loko,0,sleepDelay());
 						//enterDoor(7219);
 						waitLocation = fifteenLocation;
 						waitFinish = true;
@@ -423,14 +421,14 @@ public class hRoguesDenPlugin extends Plugin {
 						break;
 					case "OB15":
 						log.info("we are on OB15");
-						utils.walk(sixteenLocation,0,sleepDelay());
+						walk.sceneWalk(sixteenLocation,0,sleepDelay());
 						waitLocation =sixteenLocation;
 						waitFinish = true;
 						timeout = tickDelay();
 						break;
 					case "OB16":
 						log.info("we are on OB16");
-						//utils.walk(sixteenLocation,0,sleepDelay());
+						//walk.sceneWalk(sixteenLocation,0,sleepDelay());
 						enterDoor(7219);
 						waitLocation =seventeenLocation;
 						waitFinish = true;
@@ -438,7 +436,7 @@ public class hRoguesDenPlugin extends Plugin {
 						break;
 					case "OB17":
 						log.info("we are on OB17");
-						utils.walk(ateenLocation,0,sleepDelay());
+						walk.sceneWalk(ateenLocation,0,sleepDelay());
 						//enterDoor(7219);
 						waitLocation =ateenLocation;
 						waitFinish = true;
@@ -471,12 +469,13 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB21":
 
 						log.info("we are on OB21");
-						GameObject objObstacle = utils.findNearestGameObject(7249);
+						object.findNearestGameObject(7249);
+						GameObject objObstacle = object.findNearestGameObject(7249);
 						if (objObstacle != null) {
 							targetMenu = new LegacyMenuEntry("", "", objObstacle.getId(), 1001, objObstacle.getSceneMinLocation().getX(), objObstacle.getSceneMinLocation().getY(), false);
-
 							menu.setEntry( targetMenu,false);
-							utils.delayMouseClick(objObstacle.getConvexHull().getBounds(), sleepDelay());
+
+							mouse.delayMouseClick(objObstacle.getConvexHull().getBounds(), sleepDelay());
 
 						}else{
 							log.info("not found");
@@ -488,7 +487,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB22":
 
 						log.info("we are on OB22");
-						utils.walk(xxiii,0,sleepDelay());
+						walk.sceneWalk(xxiii,0,sleepDelay());
 						waitLocation =xxiii;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -496,7 +495,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB23":
 
 						log.info("we are on OB23");
-						utils.walk(xxiv,0,sleepDelay());
+						walk.sceneWalk(xxiv,0,sleepDelay());
 						waitLocation =xxiv;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -504,7 +503,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB24":
 
 						log.info("we are on OB24");
-						//pickUpObj(5568);               WHEN PICXKUP FIXED UNCOMMENT
+						pickUpObj(5568);               //WHEN PICXKUP FIXED UNCOMMENT
 						pickedUpObject = true;
 						waitLocation =xxiv;
 						waitFinish = true;
@@ -535,7 +534,7 @@ public class hRoguesDenPlugin extends Plugin {
 						doingDoors = true;
 						break;
 					case "MOVING":
-						utils.handleRun(10, 5);
+						playerUtils.handleRun(10,5);
 						log.info("runningn");
 						timeout = tickDelay();
 						if(whatDoor == 9){
@@ -548,7 +547,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB26":
 
 						log.info("we are on OB26");
-						utils.walk(agTwo,0,sleepDelay());
+						walk.sceneWalk(agTwo,0,sleepDelay());
 						waitLocation =agTwo;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -556,7 +555,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB27":
 
 						log.info("we are on OB27");
-						utils.walk(agThree,0,sleepDelay());
+						walk.sceneWalk(agThree,0,sleepDelay());
 						waitLocation =agThree;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -564,7 +563,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB28":
 
 						log.info("we are on OB28");
-						//utils.walk(agThree,0,sleepDelay());
+						//walk.sceneWalk(agThree,0,sleepDelay());
 						enterDoor(7255);
 						waitLocation =agFour;
 						waitFinish = true;
@@ -573,7 +572,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB29":
 
 						log.info("we are on OB29");
-						//utils.walk(agThree,0,sleepDelay());
+						//walk.sceneWalk(agThree,0,sleepDelay());
 						WorldPoint locs = new WorldPoint(3010,5033,1);
 						enterSpecificDoor(7255,locs);
 						waitLocation =agFive;
@@ -583,7 +582,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB30":
 
 						log.info("we are on OB30");
-						utils.walk(agSix,0,sleepDelay());
+						walk.sceneWalk(agSix,0,sleepDelay());
 						waitLocation =agSix;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -591,7 +590,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB31":
 
 						log.info("we are on OB31");
-						utils.walk(agSeven,0,sleepDelay());
+						walk.sceneWalk(agSeven,0,sleepDelay());
 						waitLocation = agSeven;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -599,7 +598,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB32":
 
 						log.info("we are on OB32");
-						utils.walk(agEight,0,sleepDelay());
+						walk.sceneWalk(agEight,0,sleepDelay());
 						waitLocation = agEight;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -607,7 +606,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB33":
 
 						log.info("we are on OB33");
-						utils.walk(agNine,0,sleepDelay());
+						walk.sceneWalk(agNine,0,sleepDelay());
 						waitLocation = agNine;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -615,7 +614,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB33.5":
 
 						log.info("we are on OB33.5");
-						//pickUpFlash(5559);                UNCOMMENT WHEN PICKFLASH WORKING
+						//pickUpObj(5559);                ///UNCOMMENT WHEN PICKFLASH WORKING
 						pickedUpFlash = true;
 						waitLocation = agNine;
 						waitFinish = true;
@@ -632,7 +631,7 @@ public class hRoguesDenPlugin extends Plugin {
 					case "OB35":
 
 						log.info("we are on OB35");
-						utils.walk(agEleven,0,sleepDelay());
+						walk.sceneWalk(agEleven,0,sleepDelay());
 						waitLocation = agEleven;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -640,7 +639,7 @@ public class hRoguesDenPlugin extends Plugin {
 
 					case "OB36":
 						log.info("we are on OB36");
-						utils.walk(agTwelve,0,sleepDelay());
+						walk.sceneWalk(agTwelve,0,sleepDelay());
 						waitLocation = agTwelve;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -648,7 +647,7 @@ public class hRoguesDenPlugin extends Plugin {
 
 					case "OB37":
 						log.info("we are on OB37");
-						utils.walk(agThirteen,0,sleepDelay());
+						walk.sceneWalk(agThirteen,0,sleepDelay());
 						waitLocation = agThirteen;
 						waitFinish = true;
 						timeout = tickDelay();
@@ -683,12 +682,12 @@ public class hRoguesDenPlugin extends Plugin {
 			return "ENTERDEN";
 
 		}
-		if (utils.isMoving(beforeLoc) && doingDoors)
+		if (playerUtils.isMoving(beforeLoc) && doingDoors)
 		{
 			timeout = tickDelay();
 			return "MOVING";
 		}
-		if(!utils.isMoving(beforeLoc) && doingDoors){
+		if(!playerUtils.isMoving(beforeLoc) && doingDoors){
 			return "OB25";
 		}
 		if(flashReady){
@@ -809,22 +808,23 @@ public class hRoguesDenPlugin extends Plugin {
 
 	private void hitAndRun(){
 		log.info("Starting hit and run");
-		WidgetItem flash = utils.getInventoryWidgetItem(5559);
+
+		WidgetItem flash = inventory.getWidgetItem(5559);
 
 		log.info(String.valueOf(flash.getQuantity()) + " si the number of flashes");
 		if(flash.getQuantity()<5){
-			utils.walk(agTen,0,20);
+			walk.sceneWalk(agTen,0,20);
 			return;
 		}
 		if(flash == null){
 			log.info("Flash is null");
 			return;
 		}
-		NPC guard = utils.findNearestNpc(3191);
+		NPC guard = npc.findNearestNpc(3191);
 		if (guard != null) {
 			targetMenu = new LegacyMenuEntry("", "", guard.getIndex(), ITEM_USE_ON_NPC.getId(), 0, 0, false);
 			menu.setModifiedEntry(targetMenu,flash.getId(),flash.getIndex(),MenuAction.ITEM_USE_ON_NPC.getId());
-			utils.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
+			mouse.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
 			return;
 
 		}
@@ -833,7 +833,7 @@ public class hRoguesDenPlugin extends Plugin {
 	private void solveLock(){
 
 		DecorativeObject das;
-		das = utils.findNearestDecorObject(7237);
+		das = object.findNearestDecorObject(7237);
 
 		if(das == null){
 			log.info("it is null");
@@ -841,7 +841,7 @@ public class hRoguesDenPlugin extends Plugin {
 		}
 		targetMenu = new LegacyMenuEntry("","",7237,GAME_OBJECT_FIRST_OPTION.getId(),das.getLocalLocation().getSceneX(),das.getLocalLocation().getSceneY(),false);
 		menu.setEntry(targetMenu);
-		utils.delayMouseClick(das.getConvexHull().getBounds(),sleepDelay());
+		mouse.delayMouseClick(das.getConvexHull().getBounds(),sleepDelay());
 		return;
 
 	}
@@ -849,7 +849,7 @@ public class hRoguesDenPlugin extends Plugin {
 
 	private void calculateDistance(){
 		player = client.getLocalPlayer();
-		guard = utils.findNearestNpc(3191);
+		guard = npc.findNearestNpc(3191);
 		if(guard == null){
 			log.info("Guard is null");
 			return;
@@ -867,20 +867,21 @@ public class hRoguesDenPlugin extends Plugin {
 		}
 	}
 	private void selectFlash(){
-		WidgetItem flash = utils.getInventoryWidgetItem(5559);
+
+		WidgetItem flash = inventory.getWidgetItem(5559);
 		targetMenu = new LegacyMenuEntry("Use", "Use", 5559, MenuAction.ITEM_USE.getId(),
 				flash.getIndex(), 9764864, false);
 		menu.setEntry(targetMenu);
-		utils.delayMouseClick(flash.getCanvasBounds(), sleepDelay());
+		mouse.delayMouseClick(flash.getCanvasBounds(), sleepDelay());
 	}
 	private void selectGuard(){
 		log.info("Running test 2");
-		guard = utils.findNearestNpc(3191);
-		WidgetItem flash = utils.getInventoryWidgetItem(5559);
+		guard = npc.findNearestNpc(3191);
+		WidgetItem flash = inventory.getWidgetItem(5559);
 		targetMenu = new LegacyMenuEntry("Examine", "<col=ffff00>Rogue Guard", 19934, 1003,
 				0, 0, false);
 		menu.setModifiedEntry(targetMenu, flash.getId(), flash.getIndex(), MenuAction.ITEM_USE_ON_NPC.getId());
-		utils.delayMouseClick(guard.getConvexHull().getBounds(), 40);
+		mouse.delayMouseClick(guard.getConvexHull().getBounds(), 40);
 
 
 /*
@@ -936,9 +937,9 @@ public class hRoguesDenPlugin extends Plugin {
 
 	private void solvePuzzle(){
 		if(client.getWidget(161,16) != null){
-			targetMenu = new LegacyMenuEntry("", "", 0, CC_OP.getId(), -1, 45088773, false);
+			targetMenu = new LegacyMenuEntry("Select", "", 1, CC_OP.getId(), -1, 45088773, false);
 			menu.setEntry(targetMenu);
-			utils.delayMouseClick(getRandomNullPoint(), sleepDelay());
+			mouse.delayMouseClick(getRandomNullPoint(), sleepDelay());
 			return;
 		}
 
@@ -964,14 +965,23 @@ public class hRoguesDenPlugin extends Plugin {
 	}
 	*/
 
+	private void pickUpObj(int id){
+
+		targetMenu = new LegacyMenuEntry ("Take", "<col=ff9040>Tile",id,MenuAction.GROUND_ITEM_THIRD_OPTION.getId(),client.getLocalPlayer().getLocalLocation().getSceneX(),client.getLocalPlayer().getLocalLocation().getSceneY(),false);
+		menu.setEntry(targetMenu);
+		mouse.delayMouseClick(getRandomNullPoint(), sleepDelay());
+		return;
+
+	}
+
 	private void testFunction( ){
 		log.info("running test 1");
-		guard = utils.findNearestNpc(3191);
-		WidgetItem flash = utils.getInventoryWidgetItem(5559);
+		guard = npc.findNearestNpc(3191);
+		WidgetItem flash = inventory.getWidgetItem(5559);
 		targetMenu = new LegacyMenuEntry("Use", "Use", ItemID.FLASH_POWDER, 38,
 				flash.getIndex(), 9764864, false);
 		menu.setModifiedEntry(targetMenu,guard.getIndex(),0,MenuAction.ITEM_USE_ON_NPC.getId());
-		utils.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
+		mouse.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
 
 
 	}
@@ -979,17 +989,17 @@ public class hRoguesDenPlugin extends Plugin {
 	private void testfun( ){
 
 		log.info("Running test 2");
-		guard = utils.findNearestNpc(3191);
+		guard = npc.findNearestNpc(3191);
 
 		if(guard != null) {
 			log.info("no null");
 			if(player.getWorldLocation().getRegionY()-guard.getWorldLocation().getRegionY()<4) {
 				log.info("going to go flash");
-				WidgetItem flash = utils.getInventoryWidgetItem(5559);
+				WidgetItem flash = inventory.getWidgetItem(5559);
 				targetMenu = new LegacyMenuEntry("Examine", "<col=ffff00>Rogue Guard", 19934, 1003,
 						0, 0, false);
 				menu.setModifiedEntry(targetMenu, flash.getId(), flash.getIndex(), MenuAction.ITEM_USE_ON_NPC.getId());
-				utils.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
+				mouse.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
 
 				//runFast = true;
 				//pickedUpFlash = false;
@@ -1049,61 +1059,61 @@ public class hRoguesDenPlugin extends Plugin {
 	{
 		if(client.getWidget(161,34)!=null){
 			Rectangle nullArea = client.getWidget(161,34).getBounds();
-			return new Point ((int)nullArea.getX()+utils.getRandomIntBetweenRange(0,nullArea.width), (int)nullArea.getY()+utils.getRandomIntBetweenRange(0,nullArea.height));
+			return new Point ((int)nullArea.getX()+calc.getRandomIntBetweenRange(0,nullArea.width), (int)nullArea.getY()+calc.getRandomIntBetweenRange(0,nullArea.height));
 		}
 
-		return new Point(client.getCanvasWidth()-utils.getRandomIntBetweenRange(0,2),client.getCanvasHeight()-utils.getRandomIntBetweenRange(0,2));
+		return new Point(client.getCanvasWidth()-calc.getRandomIntBetweenRange(0,2),client.getCanvasHeight()-calc.getRandomIntBetweenRange(0,2));
 	}
 	private long sleepDelay() {
-		sleepLength = utils.randomDelay(false, 60, 300, 20, 100);
+		sleepLength = calc.randomDelay(false, 60, 300, 20, 100);
 		return sleepLength;
 	}
 
 	private void doObstacle(int id) {
-		GameObject objObstacle = utils.findNearestGameObject(id);
+		GameObject objObstacle = object.findNearestGameObject(id);
 		if (objObstacle != null) {
 			targetMenu = new LegacyMenuEntry("", "", objObstacle.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), objObstacle.getSceneMinLocation().getX(), objObstacle.getSceneMinLocation().getY(), false);
 			menu.setEntry(targetMenu);
-			utils.delayMouseClick(objObstacle.getConvexHull().getBounds(), sleepDelay());
+			mouse.delayMouseClick(objObstacle.getConvexHull().getBounds(), sleepDelay());
 			return;
 		}
 	}
 
 	private void doSpecificObstacle(int id, WorldPoint loc) {
 
-		GameObject objObstacle = utils.findNearestGameObjectWithin(loc,0,id);
+		GameObject objObstacle = object.findNearestGameObjectWithin(loc,0,id);
 		if (objObstacle != null) {
 			targetMenu = new LegacyMenuEntry("", "", objObstacle.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), objObstacle.getSceneMinLocation().getX(), objObstacle.getSceneMinLocation().getY(), false);
 			menu.setEntry(targetMenu);
-			utils.delayMouseClick(objObstacle.getConvexHull().getBounds(), sleepDelay());
+			mouse.delayMouseClick(objObstacle.getConvexHull().getBounds(), sleepDelay());
 			return;
 		}
 	}
 
 	private void doGround(int id) {
 
-		GroundObject groundObstacle = utils.findNearestGroundObject(id);
+		GroundObject groundObstacle = object.findNearestGroundObject(id);
 		if (groundObstacle != null) {
 			targetMenu = new LegacyMenuEntry("", "", groundObstacle.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), groundObstacle.getLocalLocation().getSceneX(), groundObstacle.getLocalLocation().getSceneY(), false);
 			menu.setEntry(targetMenu);
-			utils.delayMouseClick(groundObstacle.getConvexHull().getBounds(), sleepDelay());
+			mouse.delayMouseClick(groundObstacle.getConvexHull().getBounds(), sleepDelay());
 			return;
 		}
 
 	}
 
 	private int tickDelay() {
-		tickLength = (int) utils.randomDelay(false, 1, 2, 1, 1);
+		tickLength = (int) calc.randomDelay(false, 1, 2, 1, 1);
 		return tickLength;
 	}
 
 	private void enterDoor(int id) {
-		targetWallObject = utils.findNearestWallObject(id);
+		targetWallObject = object.findNearestWallObject(id);
 		if (targetWallObject != null) {
 			targetMenu = new LegacyMenuEntry("", "", targetWallObject.getId(), 3,
 					targetWallObject.getLocalLocation().getSceneX(), targetWallObject.getLocalLocation().getSceneY(), false);
 			menu.setEntry(targetMenu);
-			utils.delayMouseClick(targetWallObject.getConvexHull().getBounds(), sleepDelay());
+			mouse.delayMouseClick(targetWallObject.getConvexHull().getBounds(), sleepDelay());
 		} else {
 			log.info("is null");
 		}
@@ -1111,13 +1121,13 @@ public class hRoguesDenPlugin extends Plugin {
 
 	private void enterSpecificDoor(int id, WorldPoint loc) {
 
-		targetWallObject = utils.findWallObjectWithin(loc,0,id);;
+		targetWallObject = object.findWallObjectWithin(loc,0,id);;
 
 		if (targetWallObject != null) {
 			targetMenu = new LegacyMenuEntry("", "", targetWallObject.getId(), 3,
 					targetWallObject.getLocalLocation().getSceneX(), targetWallObject.getLocalLocation().getSceneY(), false);
 			menu.setEntry(targetMenu);
-			utils.delayMouseClick(targetWallObject.getConvexHull().getBounds(), sleepDelay());
+			mouse.delayMouseClick(targetWallObject.getConvexHull().getBounds(), sleepDelay());
 		} else {
 			log.info("is null");
 		}
