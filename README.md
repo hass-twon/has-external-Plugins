@@ -22,9 +22,9 @@ illumine's:
 
 owain's:
 
-- **Owner:** illumineawake
+- **Owner:** Owain94
 
-- **Name:** illu-plugins
+- **Name:** OpenOSRS-external-plugins-hosting
 
 **PLUGIN LIST**
 
@@ -36,6 +36,8 @@ owain's:
 - hasCrafting
 - hasNPCDeaggro
 - hasBirdHouseRun
+- hasOneClickMLM
+- hasOneClickBattlestave(14-14 activites)
 
 **REPORT ISSUES IN ILLUMINES DISCORD**
 
