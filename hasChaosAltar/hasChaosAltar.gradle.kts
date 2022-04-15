@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.9"
+version = "1.1.1"
 
 project.extra["PluginName"] = "hasChaosAltar"
 project.extra["PluginDescription"] = "Automatically makes prayer xp"

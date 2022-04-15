@@ -23,8 +23,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import static net.runelite.api.MenuAction.ITEM_USE_ON_GAME_OBJECT;
-import static net.runelite.api.MenuAction.ITEM_USE_ON_NPC;
+import static net.runelite.api.MenuAction.*;
 import static net.runelite.client.plugins.hasChaosAltar.hasChaosAltarState.*;
 
 ///api
@@ -161,7 +160,7 @@ public class hasChaosAltarPlugin extends Plugin {
 				resetVals();
 			}
 		} else if(configButtonClicked.getKey().equals("testButton")){
-testFunc = true;
+			testFunc = true;
 		}
 	}
 
@@ -291,17 +290,17 @@ testFunc = true;
 					useBonesOnAltar();
 					break;
 				case FINISHED:
-					utils.sendGameMessage("You have no bones brokeass");
+					utils.sendGameMessage("You have no bones broke ass");
 					startChaosAltar = false;
 					break;
 				case CLICKDUDE:
-					utils.sendGameMessage("clicking on dude");
+					utils.sendGameMessage("Clicking on dude");
 					unNoteBones();
 					selectOption = true;
 					break;
 				case CLICKDOOR:
 					openDoor();
-					timeout =2;
+					timeout =calc.getRandomIntBetweenRange(1,3);
 					break;
 
 
@@ -352,16 +351,18 @@ testFunc = true;
 			targetMenu = new LegacyMenuEntry("", "", chaosAltar.getId(), ITEM_USE_ON_GAME_OBJECT.getId(),
 					chaosAltar.getSceneMinLocation().getX(), chaosAltar.getSceneMinLocation().getY(), false);
 			utils.doModifiedActionMsTime(targetMenu, bones.getId(), bones.getIndex(), ITEM_USE_ON_GAME_OBJECT.getId(), chaosAltar.getConvexHull().getBounds(), sleepDelay());
-
+			//utils.doModifiedInvokeGameTick(targetMenu, bones.getId(), bones.getIndex(), ITEM_USE_ON_GAME_OBJECT.getId(), sleepDelay());
 		}
 
 	}
 
 	private void openDoor(){
-		targettObject = object.findNearestGameObject(566);
-		Point random = new Point(0,0);
+
+		WallObject waldor = object.findNearestWallObjectMenuWithin(doorLocation,1,"Open");
+
 		if(doorOption==0){
-			targetMenu = new LegacyMenuEntry("Open","<col=ffff>Large door",1521,3,62,52,false);
+			targetMenu = new LegacyMenuEntry("","",waldor.getId(),GAME_OBJECT_FIRST_OPTION.getId(),getObjectParam(waldor),getObjectParam1(waldor),true);
+			//targetMenu = new LegacyMenuEntry("Open","<col=ffff>Large door",1521,3,62,52,false);
 			doorOption++;
 		}else{
 			targetMenu = new LegacyMenuEntry("Open","<col=ffff>Large door",1521,3,54,52,false);
@@ -370,7 +371,9 @@ testFunc = true;
 
 
 		menu.setEntry(targetMenu);
-		mouse.delayMouseClick(random,sleepDelay());
+		//utils.doInvokeMsTime(targetMenu,sleepDelay());
+		mouse.clickRandomPoint(0,10);
+		//mouse.delayMouseClick(random,sleepDelay());
 	}
 
 	//1956 original
@@ -385,17 +388,33 @@ testFunc = true;
 	}
 
 	private boolean isDoorOpen(){
-		targetWallObject = object.findWallObjectWithin(doorLocation,0,1521);
-		if(targetWallObject == null){
+		WallObject waldor = object.findNearestWallObjectMenuWithin(doorLocation,2,"Open");
+		//targetWallObject = object.findWallObjectWithin(doorLocation,0,1521);
+		if(waldor == null){
+			utils.sendGameMessage("Waldor is null");
 			return true;
 		}else{
+			utils.sendGameMessage("Waldor isnt null");
 			return false;
 		}
 	}
 
-	@Subscribe
-	private void onMenuOptionClicked(MenuOptionClicked event){
-		log.info(event.toString());
+	protected int getObjectParam(Locatable gameObject)
+	{
+		if (gameObject instanceof GameObject)
+		{
+			return ((GameObject) gameObject).getSceneMinLocation().getX();
+		}
+		return(gameObject.getLocalLocation().getSceneX());
+	}
+
+	protected int getObjectParam1(Locatable gameObject)
+	{
+		if (gameObject instanceof GameObject)
+		{
+			return ((GameObject) gameObject).getSceneMinLocation().getY();
+		}
+		return(gameObject.getLocalLocation().getSceneY());
 	}
 
 }

@@ -22,7 +22,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-version = "1.0.0"
+version = "1.0.1"
 
 project.extra["PluginName"] = "has-NPCDeaggroer"
 project.extra["PluginDescription"] = "deaggros npc such as crabs"

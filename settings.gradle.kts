@@ -33,6 +33,8 @@ include(":hasFletching")
 include(":hasCrafting")
 include(":hasNPCDeaggro")
 include(":hasBirdHouseRun")
+include(":hasOneClickMLM")
+include(":hasOneClickBattlestaves")
 
 for (project in rootProject.children) {
     project.apply {

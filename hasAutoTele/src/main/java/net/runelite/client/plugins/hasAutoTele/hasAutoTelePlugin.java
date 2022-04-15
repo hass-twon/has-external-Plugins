@@ -16,7 +16,6 @@ import net.runelite.api.events.ConfigButtonClicked;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.MenuOptionClicked;
-import static net.runelite.api.MenuAction.ITEM_USE_ON_GAME_OBJECT;
 
 
 ///client
@@ -44,7 +43,7 @@ import net.runelite.client.plugins.iutils.ObjectUtils;
 import net.runelite.client.plugins.iutils.PlayerUtils;
 
 
-import static net.runelite.api.MenuAction.ITEM_USE_ON_NPC;
+import static net.runelite.api.MenuAction.*;
 import static net.runelite.client.plugins.hasAutoTele.hasAutoTeleState.*;
 
 
@@ -274,10 +273,9 @@ public class hasAutoTelePlugin extends Plugin {
 
 			WidgetItem tablet = inventory.getWidgetItem(tabID);
 			if(tablet != null){
-				targetMenu = new LegacyMenuEntry("BREAK", "BREAK", tabID, 33, tablet.getIndex(), 9764864, false);
-				menu.setEntry(targetMenu);
-				mouse.delayMouseClick(tablet.getCanvasLocation(), sleepDelay());
-
+				targetMenu = new LegacyMenuEntry("BREAK", "BREAK", tabID, ITEM_FIRST_OPTION.getId(), tablet.getIndex(), 9764864, false);
+				utils.doInvokeMsTime(targetMenu,calc.randomDelay(false,60,350,100,120));
+				return;
 			}else{
 				utils.sendGameMessage("no tablet to tele");
 			}
