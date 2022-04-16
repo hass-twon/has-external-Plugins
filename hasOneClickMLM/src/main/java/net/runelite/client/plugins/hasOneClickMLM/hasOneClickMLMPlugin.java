@@ -265,8 +265,8 @@ public class hasOneClickMLMPlugin extends Plugin {
 		{
 			case "DETERMINE_STATE":
 				if (!playerUtils.isItemEquipped(Set.of(ItemID.RUNE_PICKAXE,ItemID.DRAGON_PICKAXE,ItemID.MITHRIL_PICKAXE,ItemID.ADAMANT_PICKAXE,ItemID.BLACK_PICKAXE,ItemID.DRAGON_PICKAXE_OR))){
-					utils.sendGameMessage("No PickAxe Equipped");
-					return;
+					utils.sendGameMessage("No PickAxe Equipped, but IDC");
+					//return;
 				}else if(inventory.isFull() && !inventory.containsItem(ItemID.PAYDIRT)){
 					utils.sendGameMessage("Empty Inventory before Starting");
 					return;
@@ -453,8 +453,7 @@ public class hasOneClickMLMPlugin extends Plugin {
 		{
 			case "DETERMINE_STATE":
 				if (!playerUtils.isItemEquipped(Set.of(ItemID.RUNE_PICKAXE,ItemID.DRAGON_PICKAXE,ItemID.MITHRIL_PICKAXE,ItemID.ADAMANT_PICKAXE,ItemID.BLACK_PICKAXE))){
-					utils.sendGameMessage("No PickAxe Equipped");
-					return;
+					utils.sendGameMessage("No PickAxe Equipped, but its your Life");
 				}else if(inventory.isFull() && !inventory.containsItem(ItemID.PAYDIRT)){
 					utils.sendGameMessage("Empty Inventory before Starting");
 					return;
