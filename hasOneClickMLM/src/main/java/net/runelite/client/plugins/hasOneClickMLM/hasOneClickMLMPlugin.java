@@ -513,11 +513,13 @@ public class hasOneClickMLMPlugin extends Plugin {
 					state = "WAIT_SHORTCUT";
 					break;
 				}
-
-				if(client.getVar(VarPlayer.SPECIAL_ATTACK_PERCENT) == 1000){//If we need to use Special Attack
-					event.setMenuEntry(useSpecialAttack());
-					return;
+				if(config.useSpec()){
+					if(client.getVar(VarPlayer.SPECIAL_ATTACK_PERCENT) == 1000){//If we need to use Special Attack
+						event.setMenuEntry(useSpecialAttack());
+						return;
+					}
 				}
+
 				WallObject closestWallThatWasFound = findClosestWallObject();
 				if(closestWallThatWasFound == null){
 					System.out.println("Wtomine are null");
