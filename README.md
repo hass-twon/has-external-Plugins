@@ -28,14 +28,14 @@ owain's:
 
 **PLUGIN LIST**
 
-- hasChaosAltar
+- hasChaosAltar (deprecated)
 - hasSmither
 - hasAutoTele
 - hRoguesDen
 - hasFletching
 - hasCrafting
 - hasNPCDeaggro
-- hasBirdHouseRun
+- hasBirdHouseRun (deprecated)
 - hasOneClickMLM
 - hasOneClickBattlestave(14-14 activites)
 
