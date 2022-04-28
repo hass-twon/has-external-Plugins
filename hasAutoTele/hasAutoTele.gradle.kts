@@ -23,13 +23,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.1.0"
+version = "1.1.1"
 
 project.extra["PluginName"] = "hasAutoTele"
 project.extra["PluginDescription"] = "Automatically teles when out of food and below hp"
 
 dependencies {
-    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.7.5+");
+    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.9.4+");
 }
 
 tasks {

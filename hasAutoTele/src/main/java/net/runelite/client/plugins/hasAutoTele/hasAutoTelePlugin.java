@@ -273,7 +273,7 @@ public class hasAutoTelePlugin extends Plugin {
 
 			WidgetItem tablet = inventory.getWidgetItem(tabID);
 			if(tablet != null){
-				targetMenu = new LegacyMenuEntry("BREAK", "BREAK", tabID, ITEM_FIRST_OPTION.getId(), tablet.getIndex(), 9764864, false);
+				targetMenu = new LegacyMenuEntry("BREAK", "BREAK", 2, CC_OP.getId(), tablet.getIndex(), 9764864, false);
 				utils.doInvokeMsTime(targetMenu,calc.randomDelay(false,60,350,100,120));
 				return;
 			}else{

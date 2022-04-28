@@ -10,6 +10,7 @@ import net.runelite.api.events.ConfigButtonClicked;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.api.widgets.WidgetItem;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
@@ -381,8 +382,12 @@ public class hasChaosAltarPlugin extends Plugin {
 	private void unNoteBones() {
 		NPC druid = npc.findNearestNpc(7995);
 		if (druid != null) {
+
 			targetMenu = new LegacyMenuEntry("", "", druid.getIndex(), ITEM_USE_ON_NPC.getId(), 0, 0, false);
-			menu.setModifiedEntry(targetMenu, notedBoneID, inventory.getWidgetItem(notedBoneID).getIndex(),  MenuAction.ITEM_USE_ON_NPC.getId());
+			menu.setModifiedEntry(targetMenu, notedBoneID, inventory.getWidgetItem(notedBoneID).getIndex(),  WIDGET_TARGET_ON_NPC.getId());
+			//menu.setModifiedEntry(new LegacyMenuEntry("", "", item1.getId(), opcode, item1.getIndex(), WidgetInfo.INVENTORY.getId(),
+			//        false), item.getId(), item.getIndex(), MenuAction.ITEM_USE_ON_ITEM.getId());
+
 			mouse.delayMouseClick(druid.getConvexHull().getBounds(), sleepDelay());
 		}
 	}

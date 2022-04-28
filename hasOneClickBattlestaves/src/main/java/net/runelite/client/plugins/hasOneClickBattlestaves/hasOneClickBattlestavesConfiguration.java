@@ -104,5 +104,18 @@ public interface hasOneClickBattlestavesConfiguration extends Config
 	}
 
 
+	@ConfigItem(
+			keyName = "isSkillingMenu",
+			name = "Skilling Menu",
+			description = "if there is a skilling menu open when item used oj each other",
+			position = 240
+
+	)
+	default boolean isSkillingMenu()
+	{
+		return true;
+	}
+
+
 
 }

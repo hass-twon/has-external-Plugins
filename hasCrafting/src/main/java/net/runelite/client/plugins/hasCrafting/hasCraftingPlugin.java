@@ -227,14 +227,12 @@ public class hasCraftingPlugin extends Plugin {
 				if (widget != null && !widget.isHidden())
 				{
 					selectCorrectItemToCraft();
-					timeout = 1;
-					return;
 				}else{
 
 				clickToolThenObject();
+				}
 				timeout = 1;
 				return;
-				}
 			}else if(playerUtils.isAnimating()){
 				Widget widget = client.getWidget(WidgetInfo.LEVEL_UP_SKILL);
 				if (widget != null && !widget.isHidden())
@@ -324,24 +322,62 @@ public class hasCraftingPlugin extends Plugin {
 	private void clickToolThenObject(){
 		WidgetItem tool = inventory.getWidgetItem(ItemID.CHISEL);
 		WidgetItem rawItem = inventory.getWidgetItem(config.craftGem().getUncutID());
+		Widget tool1 = getInventoryItem(ItemID.CHISEL);
+		Widget rawM = getInventoryItem(config.craftGem().getUncutID());
 
 
 		if(rawItem == null|| tool == null){
 			System.out.println("one of them is null");
 			return;
 		}
+		setSelectedInventoryItem(tool1);
+		targetMenu = new LegacyMenuEntry("","",0,WIDGET_TARGET_ON_WIDGET,rawM.getIndex(),9764864,true);
+		utils.doInvokeMsTime(targetMenu,sleepDelay());
+		/*
 		executorService.submit(() ->
 		{
 			System.out.println("Trying to click");
-			//menu.setModifiedEntry(new MenuEntry("", "", knife.getId(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), knife.getIndex(), WidgetInfo.INVENTORY.getId(),
-			//		false), log.getId(), log.getIndex(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId());
+			//menu.setModifiedEntry(new MenuEntry("", "", knife.getId(), MenuAction.ITEM_USE_ON_ITEM.getId(), knife.getIndex(), WidgetInfo.INVENTORY.getId(),
+			//		false), log.getId(), log.getIndex(), MenuAction.ITEM_USE_ON_ITEM.getId());
 			//mouse.click(knife.getCanvasBounds());
-			menu.setModifiedEntry(targetMenu = new LegacyMenuEntry("", "", tool.getId(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), tool.getIndex(), WidgetInfo.INVENTORY.getId(),
-							false), rawItem.getId(), rawItem.getIndex(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId());
+			menu.setModifiedEntry(targetMenu = new LegacyMenuEntry("", "", tool.getId(), MenuAction.ITEM_USE_ON_ITEM.getId(), tool.getIndex(), WidgetInfo.INVENTORY.getId(),
+							false), rawItem.getId(), rawItem.getIndex(), MenuAction.ITEM_USE_ON_ITEM.getId());
 			utils.doInvokeMsTime(targetMenu,sleepDelay());
 
 		});
 
+		 */
+
+	}
+
+
+	private void setSelectedInventoryItem(Widget item) {
+		client.setSelectedSpellWidget(WidgetInfo.INVENTORY.getId());
+		client.setSelectedSpellChildIndex(item.getIndex());
+		client.setSelectedSpellItemId(item.getItemId());
+	}
+	private Widget getInventoryItem(int id) {
+		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
+		Widget bankInventoryWidget = client.getWidget(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER);
+		if (inventoryWidget!=null && !inventoryWidget.isHidden())
+		{
+			return getWidgetItem(inventoryWidget,id);
+		}
+		if (bankInventoryWidget!=null && !bankInventoryWidget.isHidden())
+		{
+			return getWidgetItem(bankInventoryWidget,id);
+		}
+		return null;
+	}
+	private Widget getWidgetItem(Widget widget,int id) {
+		for (Widget item : widget.getDynamicChildren())
+		{
+			if (item.getItemId() == id)
+			{
+				return item;
+			}
+		}
+		return null;
 	}
 
 	private void selectCorrectItemToCraft(){
@@ -377,7 +413,7 @@ public class hasCraftingPlugin extends Plugin {
 						log.info("interacting inventory item: {}", item.getId());
 						sleep(minDelayBetween, maxDelayBetween);
 						setModifiedMenuEntry(new MenuEntry("", "", item1.getId(), opcode, item1.getIndex(), WidgetInfo.INVENTORY.getId(),
-								false), item.getId(), item.getIndex(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId());
+								false), item.getId(), item.getIndex(), MenuAction.ITEM_USE_ON_ITEM.getId());
 						click(item1.getCanvasBounds());
 						if (!interactAll)
 						{
@@ -421,7 +457,7 @@ public class hasCraftingPlugin extends Plugin {
 						log.info("interacting inventory item: {}", item.getId());
 						sleep(minDelayBetween, maxDelayBetween);
 						menu.setModifiedEntry(new MenuEntry("", "", item1.getId(), opcode, item1.getIndex(), WidgetInfo.INVENTORY.getId(),
-							false), item.getId(), item.getIndex(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId());
+							false), item.getId(), item.getIndex(), MenuAction.ITEM_USE_ON_ITEM.getId());
 						mouse.click(item1.getCanvasBounds());
 						if (!interactAll)
 						{

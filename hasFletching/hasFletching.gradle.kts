@@ -23,13 +23,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.3"
+version = "1.0.4"
 
 project.extra["PluginName"] = "hasFletching"
 project.extra["PluginDescription"] = "Automatically feltches shit and stuff "
 
 dependencies {
-    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.7.5+");
+    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.9.4+");
 }
 
 tasks {

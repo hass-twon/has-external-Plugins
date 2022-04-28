@@ -23,13 +23,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.4"
+version = "1.0.6"
 
 project.extra["PluginName"] = "has-smither"
 project.extra["PluginDescription"] = "harastwon - smiths item of choice at varrock smithery"
 
 dependencies {
-    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.7.5+");
+    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.9.4+");
 
 }
 

@@ -159,6 +159,7 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 		{
 			timeout--;
 		}
+		/*
 		if(playerUtils.isAnimating()){
 			ticksIdle = 0;
 		}else if(!playerUtils.isAnimating() && ticksIdle < config.idleTick() && !bank.isOpen()){
@@ -167,6 +168,8 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 			state = "DETERMINE_STATE";
 			resetVals();
 		}
+
+		 */
 
 	}
 
@@ -280,8 +283,12 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 					break;
 				}
 				event.setMenuEntry(useItem1OnItem2());
-				timeout += 1;
-				state = "SELECT_OPTION2";
+
+				if(config.isSkillingMenu()){
+					state = "SELECT_OPTION2";
+				}else{
+					timeout = config.idleTick();
+				}
 				break;
 			case "SELECT_OPTION2":
 				Widget skillMenus = client.getWidget(270,0);
@@ -318,19 +325,23 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 	private MenuEntry useItem1OnItem2()
 	{
 
-
-
-		client.setSelectedItemWidget(WidgetInfo.INVENTORY.getId());
-		client.setSelectedItemSlot(getInventoryItem(config.item1ID()).getIndex());
-		client.setSelectedItemID(config.item1ID());
-
+		Widget item1 = getInventoryItem(config.item1ID());
+		Widget item2 = getInventoryItem(config.item2ID());
+		if (item1 == null || item2 == null) return null;
+		setSelectedInventoryItem(item1);
 
 		return createMenuEntry(
-				config.item2ID(),
-				ITEM_USE_ON_WIDGET_ITEM,
-				inventory.getWidgetItem(config.item2ID()).getIndex(),
+				0,
+				MenuAction.WIDGET_TARGET_ON_WIDGET,
+				item2.getIndex(),
 				WidgetInfo.INVENTORY.getId(),
-				false);
+				true);
+	}
+
+	private void setSelectedInventoryItem(Widget item) {
+		client.setSelectedSpellWidget(WidgetInfo.INVENTORY.getId());
+		client.setSelectedSpellChildIndex(item.getIndex());
+		client.setSelectedSpellItemId(item.getItemId());
 	}
 
 	private MenuEntry withdrawNeeded(int item)
@@ -416,18 +427,26 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 		return new Point(tileObject.getLocalLocation().getSceneX(), tileObject.getLocalLocation().getSceneY());
 	}
 
-	private WidgetItem getInventoryItem(int id)
-	{
+	private Widget getInventoryItem(int id) {
 		Widget inventoryWidget = client.getWidget(WidgetInfo.INVENTORY);
-		if (inventoryWidget != null)
+		Widget bankInventoryWidget = client.getWidget(WidgetInfo.BANK_INVENTORY_ITEMS_CONTAINER);
+		if (inventoryWidget!=null && !inventoryWidget.isHidden())
 		{
-			Collection<WidgetItem> items = inventoryWidget.getWidgetItems();
-			for (WidgetItem item : items)
+			return getWidgetItem(inventoryWidget,id);
+		}
+		if (bankInventoryWidget!=null && !bankInventoryWidget.isHidden())
+		{
+			return getWidgetItem(bankInventoryWidget,id);
+		}
+		return null;
+	}
+
+	private Widget getWidgetItem(Widget widget,int id) {
+		for (Widget item : widget.getDynamicChildren())
+		{
+			if (item.getItemId() == id)
 			{
-				if (item.getId() == id)
-				{
-					return item;
-				}
+				return item;
 			}
 		}
 		return null;

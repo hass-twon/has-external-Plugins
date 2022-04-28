@@ -29,7 +29,7 @@ project.extra["PluginName"] = "hasBirdHouseRun"
 project.extra["PluginDescription"] = "One click plugin for BirdHouse Run"
 
 dependencies {
-    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.7.5+");
+    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.9.4+");
 }
 
 tasks {

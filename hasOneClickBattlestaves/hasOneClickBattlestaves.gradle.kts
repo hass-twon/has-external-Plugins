@@ -23,13 +23,13 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.0"
+version = "1.0.2"
 
 project.extra["PluginName"] = "hasOneClickBattlestaves"
 project.extra["PluginDescription"] = "One click plugin for battlestaves"
 
 dependencies {
-    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.7.5+");
+    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.9.4+");
 }
 
 tasks {

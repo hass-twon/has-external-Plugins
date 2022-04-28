@@ -494,7 +494,7 @@ public class hasBirdHouseRunPlugin extends Plugin {
 
 		return createMenuEntry(
 				0,
-				WIDGET_TYPE_6,
+				WIDGET_CONTINUE,
 				-1,
 				39845904,
 				false);
@@ -548,7 +548,7 @@ public class hasBirdHouseRunPlugin extends Plugin {
 	private MenuEntry useClockWorkOnLog(){
 		return createMenuEntry(
 				config.logID(),
-				MenuAction.ITEM_USE_ON_WIDGET_ITEM,
+				MenuAction.ITEM_USE_ON_ITEM,
 				inventory.getWidgetItem(config.logID()).getIndex(),
 				9764864,
 				false);
@@ -568,7 +568,7 @@ public class hasBirdHouseRunPlugin extends Plugin {
 
 		return createMenuEntry(
 				0,
-				WIDGET_TYPE_6,
+				WIDGET_CONTINUE,
 				-1,
 				39845896,
 				false);

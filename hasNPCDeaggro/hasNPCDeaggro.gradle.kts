@@ -22,13 +22,13 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-version = "1.0.1"
+version = "1.0.3"
 
 project.extra["PluginName"] = "has-NPCDeaggroer"
 project.extra["PluginDescription"] = "deaggros npc such as crabs"
 
 dependencies {
-    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.7.5+");
+    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.9.4+");
 }
 
 tasks {

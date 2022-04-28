@@ -822,7 +822,7 @@ public class hRoguesDenPlugin extends Plugin {
 		}
 		NPC guard = npc.findNearestNpc(3191);
 		if (guard != null) {
-			targetMenu = new LegacyMenuEntry("", "", guard.getIndex(), ITEM_USE_ON_NPC.getId(), 0, 0, false);
+			targetMenu = new LegacyMenuEntry("", "", guard.getIndex(), WIDGET_TARGET_ON_NPC.getId(), 0, 0, false);
 			menu.setModifiedEntry(targetMenu,flash.getId(),flash.getIndex(),MenuAction.ITEM_USE_ON_NPC.getId());
 			mouse.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
 			return;
@@ -880,7 +880,7 @@ public class hRoguesDenPlugin extends Plugin {
 		WidgetItem flash = inventory.getWidgetItem(5559);
 		targetMenu = new LegacyMenuEntry("Examine", "<col=ffff00>Rogue Guard", 19934, 1003,
 				0, 0, false);
-		menu.setModifiedEntry(targetMenu, flash.getId(), flash.getIndex(), MenuAction.ITEM_USE_ON_NPC.getId());
+		menu.setModifiedEntry(targetMenu, flash.getId(), flash.getIndex(), MenuAction.WIDGET_TARGET_ON_NPC.getId());
 		mouse.delayMouseClick(guard.getConvexHull().getBounds(), 40);
 
 
@@ -980,7 +980,7 @@ public class hRoguesDenPlugin extends Plugin {
 		WidgetItem flash = inventory.getWidgetItem(5559);
 		targetMenu = new LegacyMenuEntry("Use", "Use", ItemID.FLASH_POWDER, 38,
 				flash.getIndex(), 9764864, false);
-		menu.setModifiedEntry(targetMenu,guard.getIndex(),0,MenuAction.ITEM_USE_ON_NPC.getId());
+		menu.setModifiedEntry(targetMenu,guard.getIndex(),0,MenuAction.WIDGET_TARGET_ON_NPC.getId());
 		mouse.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
 
 
@@ -998,7 +998,7 @@ public class hRoguesDenPlugin extends Plugin {
 				WidgetItem flash = inventory.getWidgetItem(5559);
 				targetMenu = new LegacyMenuEntry("Examine", "<col=ffff00>Rogue Guard", 19934, 1003,
 						0, 0, false);
-				menu.setModifiedEntry(targetMenu, flash.getId(), flash.getIndex(), MenuAction.ITEM_USE_ON_NPC.getId());
+				menu.setModifiedEntry(targetMenu, flash.getId(), flash.getIndex(), MenuAction.WIDGET_TARGET_ON_NPC.getId());
 				mouse.delayMouseClick(guard.getConvexHull().getBounds(), sleepDelay());
 
 				//runFast = true;

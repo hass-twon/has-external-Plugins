@@ -25,14 +25,13 @@
 
 rootProject.name = "has-external-Plugins"
 
-include(":hasChaosAltar")
+
 include(":hasSmither")
 include(":hasAutoTele")
 include(":hRoguesDen")
 include(":hasFletching")
 include(":hasCrafting")
 include(":hasNPCDeaggro")
-include(":hasBirdHouseRun")
 include(":hasOneClickMLM")
 include(":hasOneClickBattlestaves")
 

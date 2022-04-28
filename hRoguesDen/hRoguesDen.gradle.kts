@@ -23,14 +23,14 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "1.0.5"
+version = "1.0.6"
 
 project.extra["PluginName"] = "hass-RoguesDen "
 project.extra["PluginDescription"] = "harasatwon - does most of rogues den for you make sure u have full run"
 
 dependencies {
 
-    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.7.5+");
+    compileOnly(group = "com.openosrs.externals", name = "iutils", version = "4.9.4+");
 
 }
 
