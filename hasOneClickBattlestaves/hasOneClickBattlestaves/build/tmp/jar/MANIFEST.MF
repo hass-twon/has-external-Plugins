@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Plugin-Version: 1.0.2
+Plugin-Id: hasoneclickbattlestaves-plugin
+Plugin-Provider: harasatwon#9508
+Plugin-Dependencies: iutils-plugin, chinbreakhandler-plugin
+Plugin-Description: One click plugin for battlestaves
+Plugin-License: 3-Clause BSD License
+

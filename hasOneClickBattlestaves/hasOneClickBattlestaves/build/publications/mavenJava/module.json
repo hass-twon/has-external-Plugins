@@ -1,0 +1,147 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.openosrs.externals",
+    "module": "hasOneClickBattlestaves",
+    "version": "1.0.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "hasOneClickBattlestaves-1.0.2.jar",
+          "url": "hasOneClickBattlestaves-1.0.2.jar",
+          "size": 9427,
+          "sha512": "0cff981d69dacf7693fe8a7cd6e0d1551ef77c31220f304323a0ceb7869d52c70524e864d8a9404c5be9fbb6278595a5492b5c9e7fe4a442b8e6db4e9e58fcbf",
+          "sha256": "71cf7aa854dd67ec4fda7732a9dfb58b5f5d170aff9ed7d24a4746b7d974ffc2",
+          "sha1": "505af50a017f32b9f1ad05a34f4bddc94d60a26b",
+          "md5": "90846411b744c9c3bedf4895cbd930ec"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "ch.qos.logback",
+          "module": "logback-classic",
+          "version": {
+            "requires": "1.2.3"
+          }
+        },
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.8.6"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "28.2-jre"
+          }
+        },
+        {
+          "group": "com.google.inject",
+          "module": "guice",
+          "version": {
+            "requires": "4.2.3"
+          },
+          "thirdPartyCompatibility": {
+            "artifactSelector": {
+              "name": "guice",
+              "type": "jar",
+              "extension": "jar",
+              "classifier": "no_aop"
+            }
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp",
+          "version": {
+            "requires": "4.5.0"
+          }
+        },
+        {
+          "group": "io.reactivex.rxjava3",
+          "module": "rxjava",
+          "version": {
+            "requires": "3.0.2"
+          }
+        },
+        {
+          "group": "net.sf.jopt-simple",
+          "module": "jopt-simple",
+          "version": {
+            "requires": "5.0.4"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-text",
+          "version": {
+            "requires": "1.8"
+          }
+        },
+        {
+          "group": "org.pf4j",
+          "module": "pf4j",
+          "version": {
+            "requires": "3.2.0"
+          }
+        },
+        {
+          "group": "org.projectlombok",
+          "module": "lombok",
+          "version": {
+            "requires": "1.18.12"
+          }
+        },
+        {
+          "group": "org.pushing-pixels",
+          "module": "radiance-substance",
+          "version": {
+            "requires": "2.5.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "hasOneClickBattlestaves-1.0.2.jar",
+          "url": "hasOneClickBattlestaves-1.0.2.jar",
+          "size": 9427,
+          "sha512": "0cff981d69dacf7693fe8a7cd6e0d1551ef77c31220f304323a0ceb7869d52c70524e864d8a9404c5be9fbb6278595a5492b5c9e7fe4a442b8e6db4e9e58fcbf",
+          "sha256": "71cf7aa854dd67ec4fda7732a9dfb58b5f5d170aff9ed7d24a4746b7d974ffc2",
+          "sha1": "505af50a017f32b9f1ad05a34f4bddc94d60a26b",
+          "md5": "90846411b744c9c3bedf4895cbd930ec"
+        }
+      ]
+    }
+  ]
+}
