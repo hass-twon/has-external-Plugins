@@ -254,7 +254,7 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 				}
 
 			case "WITHDRAW_ITEM1":
-				if(!bank.contains(config.item1ID(),14)){
+				if(!bank.contains(config.item1ID(), config.item1A())){
 					state = "STOP";
 					break;
 				}
@@ -264,7 +264,7 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 				break;
 
 			case "WITHDRAW_ITEM2":
-				if(!bank.contains(config.item2ID(),14)){
+				if(!bank.contains(config.item2ID(),config.item2A())){
 					state = "STOP";
 					break;
 				}
@@ -273,6 +273,10 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 				timeout += 1;
 				break;
 			case "CRAFT":
+				if(bank.isOpen()) {
+					event.setMenuEntry(closeBank());
+					break;
+				}
 				if(!inventory.containsItem(config.item1ID())){
 					state = "OPEN_BANK";
 					break;
@@ -305,10 +309,15 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 
 
 		}
+	}
 
-
-
-
+	private MenuEntry closeBank() {
+		return createMenuEntry(
+				1,
+				CC_OP,
+				11,
+				786434,
+				false);
 	}
 
 	private MenuEntry selectSkillMenu()
