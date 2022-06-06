@@ -254,7 +254,7 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 				}
 
 			case "WITHDRAW_ITEM1":
-				if(!bank.contains(config.item1ID(), config.item1A())){
+				if(!bank.contains(config.item1ID(), 14{
 					state = "STOP";
 					break;
 				}
@@ -264,7 +264,7 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 				break;
 
 			case "WITHDRAW_ITEM2":
-				if(!bank.contains(config.item2ID(),config.item2A())){
+				if(!bank.contains(config.item2ID(), 14){
 					state = "STOP";
 					break;
 				}
