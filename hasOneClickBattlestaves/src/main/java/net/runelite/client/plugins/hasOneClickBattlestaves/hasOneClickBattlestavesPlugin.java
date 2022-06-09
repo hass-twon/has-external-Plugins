@@ -273,6 +273,10 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 				timeout += 1;
 				break;
 			case "CRAFT":
+				if(bank.isOpen()) {
+					event.setMenuEntry(closeBank());
+					break;
+				}
 				if(!inventory.containsItem(config.item1ID())){
 					state = "OPEN_BANK";
 					break;
@@ -305,10 +309,15 @@ public class hasOneClickBattlestavesPlugin extends Plugin {
 
 
 		}
+	}
 
-
-
-
+	private MenuEntry closeBank() {
+		return createMenuEntry(
+				1,
+				CC_OP,
+				11,
+				786434,
+				false);
 	}
 
 	private MenuEntry selectSkillMenu()
